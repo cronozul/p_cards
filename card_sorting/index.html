@@ -119,12 +119,12 @@
         const urlParams = new URLSearchParams(window.location.search);
         let freeform = urlParams.get("freeform") === "1";
         let categorias = urlParams.get("categorias")?.split(",") || [];
-        let tarjetas = urlParams.get("tarjetas")?.split(",") || [];
+        const tarjetas = urlParams.get("tarjetas")?.split(",") || [];
         
         if (freeform) {
             categorias = categorias.filter(cat => cat !== "freeform");
         }
-
+        
         const container = document.getElementById("categories-container");
         const initialZone = document.getElementById("cards-container");
 
@@ -178,6 +178,7 @@
                 newParams.set("categorias", categorias.join(","));
                 window.history.replaceState(null, "", "?" + newParams.toString());
                 renderCategories();
+
             }
         }
 

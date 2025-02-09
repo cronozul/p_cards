@@ -154,7 +154,7 @@
             }
 
             // Construcción de la URL con "Freeform" antes de las categorías
-            const url = `${window.location.origin}/card-sorting.html?${freeform ? "freeform=1&" : ""}categorias=${categories.join(",")}&tarjetas=${cards}`;
+            const url = `${window.location.origin}/card_sorting/index.html?${freeform ? "freeform=1&" : ""}categorias=${categories.join(",")}&tarjetas=${cards}`;
             
             navigator.clipboard.writeText(url);
             alert("Survey link copied to clipboard: " + url);
