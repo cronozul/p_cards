@@ -87,6 +87,7 @@
             border-radius: 5px;
             margin-top: 10px;
         }
+
     </style>
 </head>
 <body>
@@ -107,6 +108,12 @@
         <div id="cards-container"></div>
 
         <button class="share-btn" id="share-survey">Share Survey</button>
+        
+        <button class="share-btn" id="redirect-survey">
+        <!-- Instead of allowing to copy redirect directly-->
+         <!-- don't style the href blue but white -->
+        <a>Test survey</a>
+        </button>
     </div>
     <div class="sidebar">
         <p><i class="bi bi-folder"></i> Projects</p>
@@ -134,31 +141,48 @@
             }
         });
 
-        document.getElementById("share-survey").addEventListener("click", function() {
-            let freeform = document.getElementById("open-card-sorting").checked ? "Freeform" : "";
+        function generateSurveyURL() {
+    let freeform = document.getElementById("open-card-sorting").checked ? "Freeform" : "";
 
-            const categories = Array.from(document.querySelectorAll("#categories-container .input-box"))
-                .map(input => input.value.trim())
-                .filter(value => value !== "")
-                .map(value => encodeURIComponent(value));
+    const categories = Array.from(document.querySelectorAll("#categories-container .input-box"))
+        .map(input => input.value.trim())
+        .filter(value => value !== "")
+        .map(value => encodeURIComponent(value));
 
-            const cards = Array.from(document.querySelectorAll("#cards-container .input-box"))
-                .map(input => input.value.trim())
-                .filter(value => value !== "")
-                .map(value => encodeURIComponent(value))
-                .join(",");
+    const cards = Array.from(document.querySelectorAll("#cards-container .input-box"))
+        .map(input => input.value.trim())
+        .filter(value => value !== "")
+        .map(value => encodeURIComponent(value))
+        .join(",");
 
-            if (!cards) {
-                alert("You must add at least one card with text to share the survey.");
-                return;
-            }
+    if (!cards) {
+        alert("You must add at least one card with text to generate the survey URL.");
+        return null; // Indicate failure
+    }
 
-            // Construcción de la URL con "Freeform" antes de las categorías
-            const url = `${window.location.origin}/card_sorting/index.html?${freeform ? "freeform=1&" : ""}categorias=${categories.join(",")}&tarjetas=${cards}`;
-            
-            navigator.clipboard.writeText(url);
-            alert("Survey link copied to clipboard: " + url);
-        });
+    // Construct URL with "Freeform" before categories
+    return `${window.location.origin}/card_sorting/index.html?${freeform ? "freeform=1&" : ""}categorias=${categories.join(",")}&tarjetas=${cards}`;
+}
+
+// Button to copy to clipboard
+document.getElementById("share-survey").addEventListener("click", function () {
+    const url = generateSurveyURL();
+    if (url) {
+        navigator.clipboard.writeText(url);
+        alert("Survey link copied to clipboard: " + url);
+    }
+});
+
+// Button to redirect
+document.getElementById("redirect-survey").addEventListener("click", function () {
+    const url = generateSurveyURL();
+    if (url) {
+        window.location.href = url;
+    }
+});
+
+
+
     </script>
 </body>
 </html>
