@@ -1,0 +1,228 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.log-in-child {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #2a3e5b;
+    width: 960px;
+    height: 1080px;
+}
+.has-vuelto {
+    position: relative;
+    line-height: 50px;
+    font-weight: 900;
+}
+.has-vuelto-wrapper {
+    position: absolute;
+    top: 181px;
+    left: 1220px;
+    width: 440px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 44px;
+    color: #050505;
+    font-family: Gazpacho;
+}
+.uxvault-logo-icon {
+    width: 96px;
+    position: relative;
+    height: 96px;
+}
+.uxvault {
+    position: relative;
+    line-height: 90px;
+    font-weight: 900;
+}
+.uxvault-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+.logo {
+    position: absolute;
+    top: calc(50% - 53px);
+    left: 233px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    font-size: 90px;
+    font-family: Gazpacho;
+}
+.text {
+    position: relative;
+    line-height: 22px;
+}
+.text-wrapper {
+    align-self: stretch;
+    border-radius: 16px;
+    border: 1px solid #643366;
+    box-sizing: border-box;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16px;
+}
+.input-form {
+    position: absolute;
+    top: 303px;
+    left: 1220px;
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: center;
+    color: #4b5563;
+}
+.text1 {
+    flex: 1;
+    position: relative;
+    line-height: 22px;
+}
+.filled-iconsvisibility-on {
+    width: 24px;
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.text-parent {
+    align-self: stretch;
+    border-radius: 16px;
+    border: 1px solid #643366;
+    box-sizing: border-box;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16px;
+    gap: 16px;
+}
+.text2 {
+    position: relative;
+    text-decoration: underline;
+    line-height: 30px;
+}
+.input-password-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    font-size: 18px;
+}
+.input-password {
+    position: absolute;
+    top: 383px;
+    left: 1220px;
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    color: #4b5563;
+}
+.default {
+    position: relative;
+    line-height: 32px;
+}
+.extra-large-buttons {
+    position: absolute;
+    top: 541px;
+    left: 1220px;
+    border-radius: 24px;
+    background-color: #643366;
+    width: 440px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
+.default-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.google-button {
+    position: absolute;
+    top: 685px;
+    left: 1248px;
+    border-radius: 24px;
+    border: 1px solid #643366;
+    box-sizing: border-box;
+    width: 384px;
+    height: 72px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    gap: 8px;
+    color: #643366;
+}
+.apple-button {
+    position: absolute;
+    top: 781px;
+    left: 1248px;
+    border-radius: 24px;
+    border: 1px solid #643366;
+    box-sizing: border-box;
+    width: 384px;
+    height: 72px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 6px;
+    text-align: center;
+    color: #643366;
+}
+.log-in-sign-up-divider-child {
+    width: 201px;
+    position: relative;
+    border-top: 1px solid #4b5563;
+    box-sizing: border-box;
+    height: 1px;
+}
+.log-in-sign-up-divider {
+    position: absolute;
+    top: 629px;
+    left: 1218px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    text-align: center;
+    color: #000;
+}
+.log-in {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 22px;
+    color: #fff;
+    font-family: 'League Spartan';
+}
+

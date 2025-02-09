@@ -1,0 +1,271 @@
+html, body {
+    overflow-y: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; 
+    box-sizing: border-box;
+}
+.footer-divider-icon {
+    position: absolute;
+    top: 340px;
+    left: 0px;
+    width: 2129.4px;
+    height: 457.3px;
+}
+.soluciones {
+    position: relative;
+    line-height: 24px;
+}
+.soluciones-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+.list-item {
+    position: relative;
+    line-height: 30px;
+}
+.list-item-link-blog-bl-container {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+.frame-group {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+    color: #4b5563;
+    font-family: 'League Spartan';
+}
+.frame-parent {
+    width: 242px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 16px;
+}
+.frame-container {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 16px;
+}
+.frame-parent1 {
+    width: 178px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 16px;
+}
+.frame-parent3 {
+    width: 127px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 16px;
+}
+.footer-links {
+    position: absolute;
+    top: 120px;
+    left: 876px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 64px;
+    color: #643366;
+}
+.uxvault-logo-icon {
+    width: 24px;
+    position: relative;
+    height: 24px;
+}
+.uxvault {
+    position: relative;
+    line-height: 38px;
+}
+.logo {
+    position: absolute;
+    top: 112px;
+    left: 144px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    font-size: 28px;
+}
+.suscrbete-a-nuestro {
+    position: relative;
+    line-height: 28px;
+}
+.mantente-al-da-container {
+    position: relative;
+    line-height: 36px;
+}
+.mantente-al-da-sobre-las-noti-wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    font-family: 'League Spartan';
+}
+.frame-parent5 {
+    width: 431px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+}
+.text {
+    position: relative;
+    line-height: 22px;
+}
+.text-wrapper {
+    align-self: stretch;
+    border-radius: 16px;
+    border: 1px solid #643366;
+    box-sizing: border-box;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16px;
+}
+.frame-wrapper {
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.pressed {
+    position: relative;
+    line-height: 18px;
+}
+.small-buttons {
+    width: 120px;
+    border-radius: 16px;
+    background-color: #4d2854;
+    border: 1px solid #4d2854;
+    box-sizing: border-box;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    text-align: left;
+    font-size: 16px;
+    color: #fff;
+}
+.frame-parent6 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+}
+.input-newslater {
+    width: 584px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: center;
+    color: #4b5563;
+    font-family: 'League Spartan';
+}
+.newslater-input {
+    position: absolute;
+    top: 701px;
+    left: calc(50% - 557px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 100px;
+    font-size: 22px;
+}
+.frame-parent7 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 56px;
+}
+.social-media-iconsdiscord {
+    width: 24px;
+    position: relative;
+    height: 18.3px;
+}
+.social-media-iconsslack {
+    width: 24px;
+    position: relative;
+    height: 20px;
+}
+.social-media-iconsmedium {
+    width: 24px;
+    position: relative;
+    height: 13.7px;
+}
+.social-media-iconsdiscord-parent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+}
+.footer-info {
+    position: absolute;
+    top: 920px;
+    left: calc(50% - 880px);
+    width: 1761px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 853px;
+    font-size: 16px;
+    color: #4b5563;
+    font-family: 'League Spartan';
+}
+.header-divider-icon {
+    position: absolute;
+    top: 880px;
+    left: calc(50% - 960px);
+    max-height: 100%;
+    width: 1920px;
+}
+.footer {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 18px;
+    color: #050505;
+    font-family: 'DM Serif Text';
+}
+

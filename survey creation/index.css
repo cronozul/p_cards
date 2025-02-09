@@ -1,0 +1,127 @@
+/* Estilos generales */
+body {
+    font-family: 'League Spartan', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+.card-sorting-ux-interfaz {
+    width: 80%;
+    max-width: 800px;
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título principal */
+.card-sorting {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+/* Contenedores de categorías y tarjetas */
+.categories-container, .cards-container {
+    margin-bottom: 20px;
+}
+
+/* Encabezados */
+.categories-wrapper, .cards-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.categories, .cards {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Botón de agregar */
+.add-category, .add-card {
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-category:hover, .add-card:hover {
+    background-color: #3700b3;
+}
+
+/* Lista de categorías y tarjetas */
+.categories-list, .cards-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Estilos de cada categoría */
+.categoras, .tarjetas {
+    background-color: #eeeeee;
+    padding: 10px;
+    border-radius: 4px;
+    min-width: 150px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.categoras:hover, .tarjetas:hover {
+    background-color: #dddddd;
+}
+
+/* Header */
+.heder-de-proyectos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.uxvault-logo-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.uxvault {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.outlined-icons-wrapper img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+    .card-sorting-ux-interfaz {
+        width: 95%;
+        padding: 16px;
+    }
+    
+    .categoras, .tarjetas {
+        min-width: 120px;
+    }
+}

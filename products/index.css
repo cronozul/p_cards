@@ -1,0 +1,144 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.soluciones {
+    position: relative;
+    line-height: 66px;
+}
+.soluciones-wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+.korem-ipsum-dolor {
+    width: 677px;
+    position: relative;
+    line-height: 22px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.korem-ipsum-dolor-sit-amet-co-wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    text-align: center;
+    font-size: 22px;
+    font-family: 'League Spartan';
+}
+.frame-parent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 24px;
+}
+.products-inner {
+    position: absolute;
+    top: 200px;
+    left: calc(50% - 808px);
+    width: 1616px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.header-divider-icon {
+    position: absolute;
+    top: 120px;
+    left: calc(50% - 960px);
+    max-height: 100%;
+    width: 1920px;
+}
+.uxvault-logo-icon {
+    width: 24px;
+    position: relative;
+    height: 24px;
+}
+.uxvault {
+    position: relative;
+    line-height: 38px;
+}
+.uxvault-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+.soluciones2 {
+    position: relative;
+    line-height: 18px;
+    font-weight: 500;
+}
+.outlined-iconsarrow-down {
+    width: 24px;
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.recursos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    gap: 8px;
+}
+.men-de-navegacin {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    font-size: 16px;
+    font-family: 'League Spartan';
+}
+.header-versin-dark {
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 960px);
+    box-shadow: 0px 386px 108px rgba(0, 0, 0, 0), 0px 247px 99px rgba(0, 0, 0, 0.01), 0px 139px 83px rgba(0, 0, 0, 0.05), 0px 62px 62px rgba(0, 0, 0, 0.09), 0px 15px 34px rgba(0, 0, 0, 0.1);
+    background-color: #050505;
+    width: 1920px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    gap: 320px;
+    font-size: 28px;
+}
+.products {
+    width: 100%;
+    position: relative;
+    background-color: #050505;
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 56px;
+    color: #fff;
+    font-family: 'DM Serif Text';
+}
+

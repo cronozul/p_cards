@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400&display=swap" />
+</head>
+<body>
+    <div class="card-sorting-ux-interfaz-24">
+        <div class="card-sorting">Card sorting</div>
+        
+        <div class="categories-container">
+            <div class="categories-wrapper">
+                <div class="categories">Categories</div>
+                <button class="add-category" title="Add Category">+</button>
+            </div>
+            <div class="categories-list">
+                <div class="categoras" contenteditable="true">Write the category name here</div>
+                <div class="categoras" contenteditable="true">Write the category name here</div>
+            </div>
+        </div>
+        
+        <div class="cards-container">
+            <div class="cards-wrapper">
+                <div class="cards">Cards</div>
+                <button class="add-card" title="Add Card">+</button>
+            </div>
+            <div class="cards-list">
+                <div class="tarjetas" contenteditable="true">Write the card name here</div>
+                <div class="tarjetas" contenteditable="true">Write the card name here</div>
+            </div>
+        </div>
+        
+        <div class="heder-de-proyectos">
+            <div class="logo-wrapper">
+                <div class="logo">
+                    <img class="uxvault-logo-icon" alt="UX Vault Logo" src="ux.vault logo.svg">
+                    <div class="uxvault-wrapper">
+                        <div class="uxvault">ux.vault</div>
+                    </div>
+                </div>
+            </div>
+            <div class="heder-de-proyectos-inner">
+                <div class="outlined-icons-wrapper">
+                    <img class="uxvault-logo-icon" alt="Icons" src="outlined icons.svg">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelector(".add-category").addEventListener("click", function () {
+            const categoryList = document.querySelector(".categories-list");
+            const newCategory = document.createElement("div");
+            newCategory.classList.add("categoras");
+            newCategory.setAttribute("contenteditable", "true");
+            newCategory.textContent = "Write the category name here";
+            categoryList.appendChild(newCategory);
+        });
+        
+        document.querySelector(".add-card").addEventListener("click", function () {
+            const cardsList = document.querySelector(".cards-list");
+            const newCard = document.createElement("div");
+            newCard.classList.add("tarjetas");
+            newCard.setAttribute("contenteditable", "true");
+            newCard.textContent = "Write the card name here";
+            cardsList.appendChild(newCard);
+        });
+    </script>
+</body>
+</html>
