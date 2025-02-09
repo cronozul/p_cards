@@ -1,0 +1,229 @@
+html, body {
+    overflow-y: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; 
+    box-sizing: border-box;
+}
+.uxvault-logo-icon {
+    width: 24px;
+    position: relative;
+    height: 24px;
+}
+.uxvault {
+    position: relative;
+    line-height: 38px;
+}
+.uxvault-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+.logo {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    text-align: left;
+    font-size: 28px;
+    color: #050505;
+    font-family: 'DM Serif Text';
+}
+.decorative-element-icon {
+    position: absolute;
+    top: 304px;
+    left: 0px;
+    width: 76.6px;
+    height: 170.5px;
+}
+.decorative-element-icon1 {
+    position: absolute;
+    top: 802px;
+    left: 0px;
+    width: 640px;
+    height: 278.1px;
+}
+.decorative-element-icon2 {
+    position: absolute;
+    top: 0px;
+    left: 1430px;
+    width: 490.2px;
+    height: 213px;
+}
+.decorative-element-icon3 {
+    position: absolute;
+    top: 879.06px;
+    left: 1462px;
+    width: 514.8px;
+    height: 281.6px;
+    object-fit: contain;
+}
+.decorative-element-icon4 {
+    position: absolute;
+    top: 560px;
+    left: 1840.91px;
+    width: 94.7px;
+    height: 177.8px;
+    object-fit: contain;
+}
+.soluciones1 {
+    position: relative;
+    line-height: 18px;
+    font-weight: 500;
+}
+.outlined-iconsarrow-down {
+    width: 24px;
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.soluciones {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    gap: 8px;
+}
+.men-de-navegacin {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+}
+.header-versin-light {
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 960px);
+    filter: drop-shadow(0px 386px 108px rgba(0, 0, 0, 0)) drop-shadow(0px 247px 99px rgba(0, 0, 0, 0.01)) drop-shadow(0px 139px 83px rgba(0, 0, 0, 0.05)) drop-shadow(0px 62px 62px rgba(0, 0, 0, 0.09)) drop-shadow(0px 15px 34px rgba(0, 0, 0, 0.1));
+    width: 1920px;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+.vector-icon {
+    position: absolute;
+    top: 802px;
+    left: 0px;
+    width: 204.9px;
+    height: 244px;
+}
+.decorative-element-icon5 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 480px;
+    height: 230px;
+}
+.title {
+    flex: 1;
+    position: relative;
+    line-height: 90px;
+}
+.title-container {
+    width: 1236px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.subtitle {
+    position: relative;
+    line-height: 46px;
+    white-space: pre-wrap;
+}
+.subtitle-container {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    font-size: 36px;
+}
+.main-content {
+    position: absolute;
+    top: 264px;
+    left: calc(50% - 618px);
+    width: 1236px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 32px;
+    text-align: center;
+    font-size: 90px;
+    font-family: 'DM Serif Text';
+}
+.default {
+    position: relative;
+    line-height: 20px;
+}
+.large-buttons {
+    position: absolute;
+    top: 774px;
+    left: 758px;
+    border-radius: 24px;
+    background-color: #643366;
+    width: 220px;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+}
+.default1 {
+    position: relative;
+    line-height: 18px;
+}
+.medium-buttons {
+    position: absolute;
+    top: 774px;
+    left: 1002px;
+    border-radius: 16px;
+    border: 1px solid #643366;
+    box-sizing: border-box;
+    width: 160px;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #643366;
+}
+.homepage {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 16px;
+    color: #050505;
+    font-family: 'League Spartan';
+}
+
