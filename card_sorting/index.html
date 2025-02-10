@@ -30,6 +30,7 @@
         }
 
         .initial-zone, .category {
+
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -91,13 +92,18 @@
     <div class="top-buttons">
         <button class="button" id="finish-button">Terminar</button>
         <button class="button" id="whatsapp-button">WhatsApp</button>
+        <button class="button" id="add-category-button" style="display: none;">Agregar Categoría</button>
     </div>
 
     <h2>Card Sorting Session</h2>
     <p>Arrastra las tarjetas a las categorías o regrésalas a la zona inicial.</p>
 
     <div class="initial-zone" id="initial-zone">
-        <h3>Zona de Inicio</h3>
+        <h3 
+        style=
+        "margin-right: 10px;
+        margin-left: 10px;">
+        Zona de Inicio </h3>
         <div class="cards-container" id="cards-container"></div>
     </div>
 
@@ -112,12 +118,19 @@
         if (!urlParams.has("categorias") && !urlParams.has("tarjetas")) {
             alert("⚠️ No URL parameters found. Using default test setup.");
             categorias = ["Grupo A", "Grupo B"];
-            tarjetas = ["Tarjeta 1", "Tarjeta 2", "Tarjeta 3"];
+            tarjetas = ["Tarjeta 1", "Tarjeta 2", "Tarjeta 3","Tarjeta 1", "Tarjeta 2", "Tarjeta 3","Tarjeta 1", "Tarjeta 2", "Tarjeta 3"];
+            freeform = true;
         }
 
         const container = document.getElementById("categories-container");
         const initialCardsContainer = document.getElementById("cards-container");
         const initialZone = document.getElementById("initial-zone");
+        const addCategoryButton = document.getElementById("add-category-button");
+
+        if (freeform) {
+            addCategoryButton.style.display = "block";
+            addCategoryButton.addEventListener("click", addCategory);
+        }
 
         function handleDrop(e, div) {
             e.preventDefault();
@@ -141,14 +154,26 @@
         function renderCategories() {
             container.innerHTML = "";
             categorias.forEach((categoria, index) => {
-                const div = document.createElement("div");
-                div.classList.add("category");
-                div.setAttribute("data-category", categoria);
-                div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
-                div.addEventListener("dragover", e => e.preventDefault());
-                div.addEventListener("drop", e => handleDrop(e, div.querySelector('.cards-container')));
-                container.appendChild(div);
+                createCategoryElement(categoria, index);
             });
+        }
+
+        function createCategoryElement(categoria, index) {
+            const div = document.createElement("div");
+            div.classList.add("category");
+            div.setAttribute("data-category", categoria);
+            div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
+            div.addEventListener("dragover", e => e.preventDefault());
+            div.addEventListener("drop", e => handleDrop(e, div.querySelector('.cards-container')));
+            container.appendChild(div);
+        }
+
+        function addCategory() {
+            const categoryName = prompt("Ingrese el nombre de la nueva categoría:");
+            if (categoryName) {
+                categorias.push(categoryName);
+                createCategoryElement(categoryName, categorias.length - 1);
+            }
         }
 
         function renderCards() {
