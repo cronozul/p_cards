@@ -29,57 +29,45 @@
             cursor: pointer;
         }
 
-        .initial-zone { 
-            display: flex; 
-            align-items: center; 
-            justify-content: flex-start; 
-            width: 100%; 
-            min-height: 40px;
-            background: white; 
-            padding: 10px 20px; 
-            border-radius: 8px; 
-            border: 2px dashed #ccc; 
+        .initial-zone, .category {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            min-height: 60px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px dashed #ccc;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
-        }
-
-        .initial-zone h3 {
-            margin: 0;
-            text-align: left;
-            flex-shrink: 0;
+            position: relative;
         }
 
         .cards-container {
             display: flex;
             flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
             justify-content: flex-start;
-            gap: 10px;
-            margin-left: 20px;
-            flex-grow: 1;
+            margin-top: 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 10px;
         }
 
         .category { 
             width: 220px; 
             min-height: 250px; 
-            background: white; 
-            padding: 10px; 
-            border-radius: 8px; 
-            border: 2px dashed #ccc; 
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
             display: flex; 
             flex-direction: column;
             align-items: center;
-        }
-
-        .add-category {
-            cursor: pointer;
-            font-size: 20px;
-            background: #6200ea;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 50%;
-            margin-top: 10px;
+            flex-shrink: 0;
         }
 
         .card { 
@@ -108,7 +96,7 @@
     <h2>Card Sorting Session</h2>
     <p>Arrastra las tarjetas a las categorías o regrésalas a la zona inicial.</p>
 
-    <div class="initial-zone" id="initial-zone" data-category="initial-zone">
+    <div class="initial-zone" id="initial-zone">
         <h3>Zona de Inicio</h3>
         <div class="cards-container" id="cards-container"></div>
     </div>
@@ -118,69 +106,66 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         let freeform = urlParams.get("freeform") === "1";
-        let categorias = urlParams.get("categorias")?.split(",") || [];
-        const tarjetas = urlParams.get("tarjetas")?.split(",") || [];
-        
-        if (freeform) {
-            categorias = categorias.filter(cat => cat !== "freeform");
+        let categorias = urlParams.get("categorias")?.split(",").filter(Boolean) || [];
+        let tarjetas = urlParams.get("tarjetas")?.split(",").filter(Boolean) || [];
+
+        if (!urlParams.has("categorias") && !urlParams.has("tarjetas")) {
+            alert("⚠️ No URL parameters found. Using default test setup.");
+            categorias = ["Grupo A", "Grupo B"];
+            tarjetas = ["Tarjeta 1", "Tarjeta 2", "Tarjeta 3"];
         }
-        
+
         const container = document.getElementById("categories-container");
-        const initialZone = document.getElementById("cards-container");
+        const initialCardsContainer = document.getElementById("cards-container");
+        const initialZone = document.getElementById("initial-zone");
+
+        function handleDrop(e, div) {
+            e.preventDefault();
+            const cardId = e.dataTransfer.getData("text/plain");
+            const card = document.getElementById(cardId);
+            if (card) {
+                div.appendChild(card);
+            }
+        }
+
+        function addDragAndDropListeners(element) {
+            element.addEventListener("dragstart", e => {
+                e.dataTransfer.setData("text/plain", e.target.id);
+                e.target.classList.add("dragging");
+            });
+            element.addEventListener("dragend", e => {
+                e.target.classList.remove("dragging");
+            });
+        }
 
         function renderCategories() {
             container.innerHTML = "";
-            categorias.forEach(categoria => {
+            categorias.forEach((categoria, index) => {
                 const div = document.createElement("div");
                 div.classList.add("category");
                 div.setAttribute("data-category", categoria);
-                div.innerHTML = `<h3>${categoria}</h3>`;
+                div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
                 div.addEventListener("dragover", e => e.preventDefault());
-                div.addEventListener("drop", e => handleDrop(e, div));
+                div.addEventListener("drop", e => handleDrop(e, div.querySelector('.cards-container')));
                 container.appendChild(div);
             });
-
-            if (freeform) {
-                const addCategoryBtn = document.createElement("button");
-                addCategoryBtn.classList.add("add-category");
-                addCategoryBtn.innerText = "+";
-                addCategoryBtn.onclick = addNewCategory;
-                container.appendChild(addCategoryBtn);
-            }
         }
 
         function renderCards() {
-            initialZone.innerHTML = "";
-            tarjetas.forEach(texto => {
+            initialCardsContainer.innerHTML = "";
+            tarjetas.forEach((tarjeta, index) => {
                 const card = document.createElement("div");
                 card.classList.add("card");
-                card.innerText = texto;
-                card.draggable = true;
-                card.addEventListener("dragstart", e => { e.dataTransfer.setData("text", texto); card.classList.add("dragging"); });
-                card.addEventListener("dragend", () => card.classList.remove("dragging"));
-                initialZone.appendChild(card);
+                card.setAttribute("draggable", "true");
+                card.setAttribute("id", `card-${index}`);
+                card.innerText = tarjeta;
+                addDragAndDropListeners(card);
+                initialCardsContainer.appendChild(card);
             });
         }
 
-        function handleDrop(e, target) {
-            e.preventDefault();
-            const text = e.dataTransfer.getData("text");
-            const card = [...document.querySelectorAll(".card")].find(c => c.innerText === text);
-            if (card) target.appendChild(card);
-        }
-
-        function addNewCategory() {
-            const newCategory = prompt("Nombre de la nueva categoría:");
-            if (newCategory) {
-                categorias.push(newCategory);
-                const newParams = new URLSearchParams(window.location.search);
-                newParams.set("freeform", "1");
-                newParams.set("categorias", categorias.join(","));
-                window.history.replaceState(null, "", "?" + newParams.toString());
-                renderCategories();
-
-            }
-        }
+        initialZone.addEventListener("dragover", e => e.preventDefault());
+        initialZone.addEventListener("drop", e => handleDrop(e, initialCardsContainer));
 
         renderCategories();
         renderCards();
