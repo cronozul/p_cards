@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Similarity Matrix & Dendrogram</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.0/full/pyodide.js"></script>
+    <script defer src="d3_matrix.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .plot-container {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 1000px;
+            overflow-x: auto;
+        }
+
+        #loading {
+            margin: 20px;
+            font-size: 18px;
+            display: block;
+        }
+
+        .dendrogram {
+            display: none;
+            width: 80%;
+            margin-top: 30px;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Interactive Similarity Matrix & Dendrogram</h1>
+    <p>Order: <select id="order">
+        <option value="name">by Name</option>
+        <option value="count">by Frequency</option>
+        <option value="group">by Cluster</option>
+      </select>
+
+      </p>
+
+    <p id="loading">Loading similarity matrix...</p>
+
+    <div class="container">
+        <div id="matrix-container" class="plot-container"></div>
+        <canvas id="dendrogramCanvas" class="dendrogram"></canvas>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // 🔴 CENTRALIZED SURVEY DATA (Used for D3.js & Pyodide)
+        const cards = ['Buscar veterinaria', 'Mapa', 'QR', 'Citas', 'Ayuda',
+            'Información de veterinaria', 'Clubs', 'Rating / Reviews',
+            'Configuración notificaciones', 'Términos y condiciones',
+            'Cerrar sesión', 'Configuración', 'Salud', 'Perfil mascota',
+            'Evaluación de servicio en veterinaria', 'Modo oscuro',
+            'Métodos de pago', 'Notificaciones', 'Editar Biografía',
+            'Póliza de seguro', 'Favoritos', 'Llenar datos', 'Perfil de usuario',
+            'Editar perfil de usuario', 'Agregar / Modificar huella digital',
+            'Confirmación de pago', 'Se unió una nueva Clínica veterinaria',
+            'Confirmación', 'Confirmación cita',
+            'Configuración recordatorio para citas y vacunas', 'Recordatorio cita',
+            'Recordatorio vacuna', 'Clubes', 'Editar Biografia'];
+
+        const survey = [[0, 0, 0.0, 0, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.0, 0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2, 2.0, 2.0, 2.0, 2.0, 2.0, 3, 3.0, 3, 3.0, 3, 3.0, 3.0, 'NaN', 'NaN'],
+        [1, 0, 2.0, 0, 0.0, 0.0, 0.0, 0, 'NaN', 'NaN', 'NaN', 1, 1.0, 1.0, 3.0, 2.0, 2.0, 1.0, 1.0, 1, 2.0, 0.0, 2.0, 2.0, 1.0, 3, 3.0, 0, 3.0, 1, 1.0, 1.0, 'NaN', 'NaN'],
+        [0, 0, 0.0, 0, 2.0, 0.0, 0.0, 0, 'NaN', 'NaN', 'NaN', 2, 1.0, 1.0, 0.0, 2.0, 2.0, 3.0, 1.0, 2, 0.0, 0.0, 2.0, 2.0, 2.0, 3, 3.0, 3, 3.0, 2, 3.0, 3.0, 'NaN', 'NaN'],
+        [0, 0, 1.0, 1, 2.0, 0.0, 1.0, 0, 'NaN', 'NaN', 'NaN', 2, 1.0, 1.0, 3.0, 1.0, 1.0, 3.0, 1.0, 1, 2.0, 0.0, 1.0, 2.0, 2.0, 3, 3.0, 3, 3.0, 2, 3.0, 3.0, 'NaN', 'NaN'],
+        [2, 2, 0.0, 2, 0.0, 2.0, 1.0, 0, 0.0, 0.0, 0.0, 0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 1, 1.0, 2.0, 0.0, 1.0, 0.0, 3, 3.0, 3, 3.0, 0, 3.0, 3.0, 'NaN', 'NaN'],
+        [0, 0, 'NaN', 2, 'NaN', 0.0, 'NaN', 0, 0.0, 0.0, 1.0, 0, 2.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2, 'NaN', 1.0, 'NaN', 1.0, 0.0, 3, 3.0, 3, 3.0, 0, 3.0, 3.0, 'NaN', 'NaN'],
+        [2, 2, 0.0, 2, 0.0, 2.0, 0.0, 0, 0.0, 0.0, 0.0, 0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0, 1.0, 1.0, 0.0, 1.0, 0.0, 3, 3.0, 3, 3.0, 0, 3.0, 3.0, 'NaN', 'NaN'],
+        [2, 2, 3.0, 2, 1.0, 1.0, 2.0, 0, 3.0, 1.0, 1.0, 0, 2.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1, 2.0, 1.0, 0.0, 0.0, 1.0, 3, 3.0, 3, 3.0, 0, 1.0, 1.0, 'NaN', 'NaN'],
+        [2, 0, 'NaN', 2, 0.0, 'NaN', 0.0, 0, 3.0, 0.0, 1.0, 0, 2.0, 0.0, 2.0, 1.0, 1.0, 0.0, 2.0, 1, 0.0, 'NaN', 0.0, 'NaN', 1.0, 3, 3.0, 0, 3.0, 2, 3.0, 3.0, 'NaN', 'NaN'],
+        [0, 0, 'NaN', 2, 0.0, 0.0, 0.0, 0, 3.0, 0.0, 0.0, 0, 2.0, 2.0, 0.0, 0.0, 0.0, 'NaN', 'NaN', 0, 0.0, 'NaN', 1.0, 1.0, 0.0, 3, 2.0, 3, 3.0, 3, 3.0, 3.0, 'NaN', 'NaN'],
+        [2, 0, 'NaN', 2, 0.0, 2.0, 0.0, 0, 3.0, 0.0, 0.0, 0, 2.0, 'NaN', 2.0, 0.0, 2.0, 3.0, 1.0, 1, 0.0, 2.0, 'NaN', 1.0, 0.0, 2, 'NaN', 1, 1.0, 2, 3.0, 3.0, 'NaN', 'NaN'],
+        [0, 0, 0.0, 2, 0.0, 0.0, 0.0, 0, 3.0, 0.0, 0.0, 0, 'NaN', 0.0, 0.0, 0.0, 0.0, 'NaN', 2.0, 1, 0.0, 2.0, 0.0, 'NaN', 1.0, 3, 3.0, 3, 3.0, 0, 'NaN', 3.0, 'NaN', 'NaN'],
+        [0, 2, 'NaN', 2, 0.0, 'NaN', 2.0, 2, 3.0, 0.0, 0.0, 0, 2.0, 2.0, 'NaN', 1.0, 1.0, 3.0, 0.0, 1, 'NaN', 0.0, 1.0, 'NaN', 'NaN', 1, 3.0, 0, 2.0, 0, 'NaN', 'NaN', 'NaN', 'NaN'],
+        [0, 0, 2.0, 0, 0.0, 0.0, 1.0, 1, 1.0, 1.0, 0.0, 0, 2.0, 0.0, 1.0, 1.0, 'NaN', 0.0, 'NaN', 2, 0.0, 'NaN', 0.0, 'NaN', 1.0, 3, 'NaN', 0, 'NaN', 1, 3.0, 3.0, 'NaN', 'NaN'],
+        [0, 0, 'NaN', 0, 0.0, 'NaN', 0.0, 1, 2.0, 0.0, 0.0, 1, 2.0, 0.0, 2.0, 'NaN', 1.0, 0.0, 2.0, 2, 0.0, 2.0, 0.0, 1.0, 1.0, 3, 3.0, 0, 3.0, 1, 'NaN', 3.0, 'NaN', 'NaN'],
+        [0, 0, 0.0, 0, 0.0, 0.0, 'NaN', 0, 3.0, 0.0, 0.0, 0, 0.0, 2.0, 0.0, 1.0, 1.0, 0.0, 'NaN', 0, 1.0, 0.0, 1.0, 1.0, 1.0, 0, 3.0, 0, 0.0, 3, 3.0, 3.0, 0.0, 2.0],
+        ]; // ⬆️ Truncated for brevity
+
+        // 🔹 Convert Survey Data to Links Format for D3.js
+        function convertSurveyToLinks(cards, survey) {
+            let links = [];
+            let count = {}; // Store co-occurrence counts
+
+            for (let response of survey) {
+                let activeItems = response.map((val, i) => (val !== 'NaN' ? cards[i] : null)).filter(v => v !== null);
+                for (let i = 0; i < activeItems.length; i++) {
+                    for (let j = i + 1; j < activeItems.length; j++) {
+                        let key = [activeItems[i], activeItems[j]].sort().join("_");
+                        count[key] = (count[key] || 0) + 1;
+                    }
+                }
+            }
+
+            Object.entries(count).forEach(([pair, value]) => {
+                let [source, target] = pair.split("_");
+                links.push({ source: cards.indexOf(source), target: cards.indexOf(target), value });
+            });
+
+            return { nodes: cards, links };
+        }
+
+        const clusterData = convertSurveyToLinks(cards, survey);
+        window.clusterData = clusterData; // 🔹 Make it accessible for d3_matrix.js
+
+        let pyodideInstance = null;
+
+        async function loadPyodideAndRunClustering() {
+            console.log("Loading Pyodide...");
+            pyodideInstance = await loadPyodide();
+            console.log("Pyodide Loaded!");
+
+            await pyodideInstance.loadPackage(["numpy", "scipy", "matplotlib", "pandas"]);
+            console.log("SciPy, NumPy, and Matplotlib Loaded!");
+
+            const pythonCode = await fetch("py_cluster.py").then(res => res.text());
+            const jsonClusterData = JSON.stringify(clusterData);
+
+            let base64Image = await pyodideInstance.runPythonAsync(`
+import json
+import numpy as np
+import pandas as pd
+import scipy.cluster.hierarchy as sch
+import matplotlib.pyplot as plt
+import io
+import base64
+
+# Load data from JS
+cluster_data = json.loads("""${jsonClusterData}""")
+variables = cluster_data["nodes"]
+
+# Build similarity matrix
+n = len(variables)
+matrix = np.zeros((n, n))
+
+for link in cluster_data["links"]:
+    matrix[link["source"], link["target"]] = link["value"]
+    matrix[link["target"], link["source"]] = link["value"]
+
+# Clustering
+Z = sch.linkage(matrix, method='ward')
+
+# Plot dendrogram
+fig, ax = plt.subplots(figsize=(10, 6))
+sch.dendrogram(Z, labels=variables, orientation="right", ax=ax)
+
+# Save as base64
+buf = io.BytesIO()
+fig.savefig(buf, format="png", bbox_inches="tight")
+buf.seek(0)
+base64.b64encode(buf.read()).decode("utf-8")
+`);
+
+            let dendrogramImg = new Image();
+            dendrogramImg.src = "data:image/png;base64," + base64Image;
+
+            dendrogramImg.onload = function () {
+                let canvas = document.getElementById("dendrogramCanvas");
+                let ctx = canvas.getContext("2d");
+                canvas.width = dendrogramImg.width;
+                canvas.height = dendrogramImg.height;
+                ctx.drawImage(dendrogramImg, 0, 0);
+                canvas.style.display = "block";
+                document.getElementById("loading").style.display = "none";
+            };
+        }
+
+        loadPyodideAndRunClustering();
+    </script>
+</body>
+<p style="font-size: 12px; color: gray;">
+    Inspired by <a href="https://bost.ocks.org/mike/miserables/" target="_blank">Mike Bostock’s "Les Misérables" matrix</a>.
+    Adapted for dynamic survey-based clustering.
+</p>
+
+</html>
