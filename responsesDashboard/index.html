@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:wght@400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <title>Compartir ID</title>
+</head>
+       
+<style>
+    body {
+        font-family: 'DM Serif Text', serif;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        padding: 20px;
+    }
+
+    .uxvault-wrapper {
+       display: flex;
+       flex-direction: row;
+       align-items: left;
+       justify-content: left;
+       padding: 8px;
+       flex: 1; 
+       top: 0px;
+    }
+    #id-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: left;
+      gap: 10px;
+      max-width: 1000px;
+      font-family: 'League Spartan';
+    }
+
+    .card {
+        background: #FFF;
+        padding: 20px;
+        margin: 10px;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 16px;
+        box-shadow: 0px 4px 4px 0px #656565;
+        position: relative;
+        border: 1px solid var(--neutral-colors-neutral-02, #656565);
+    }
+    .share-btn {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: none;
+        border: 1px solid var(--neutral-colors-neutral-02, #656565);
+        cursor: pointer;
+        border-radius: 16px;
+
+    }
+
+    .floating-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #643366;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+</style>
+
+<body>
+    <div class="uxvault-wrapper">
+        <img src="img/ux-vault-logo.svg" alt="UX Vault Logo" class="ux-vault-logo">
+    </div>
+    <h2>Card sorting responses</h2>
+    
+    <div id="id-container"></div>
+    <button class="floating-btn" onclick="verResultados()">Get results</button>
+
+    <script>
+        const container = document.getElementById("id-container");
+
+        function getStoredIDs() {
+            return JSON.parse(localStorage.getItem("storedIDs")) || [];
+        }
+
+        function saveID(id) {
+            let storedIDs = getStoredIDs();
+            if (!storedIDs.includes(id)) {
+                storedIDs.push(id);
+                localStorage.setItem("storedIDs", JSON.stringify(storedIDs));
+            }
+        }
+
+        function addCard(id) {
+            const card = document.createElement("div");
+            card.className = "card";
+            
+            const text = document.createElement("span");
+            text.textContent = id;
+            
+            const button = document.createElement("button");
+            button.className = "share-btn";
+            button.innerHTML = "Copy URL";
+            
+            button.onclick = () => copyToClipboard(id, button);
+            
+            card.appendChild(text);
+            card.appendChild(button);
+            container.appendChild(card);
+        }
+
+        function copyToClipboard(id, button) {
+    const baseUrl = window.location.origin + window.location.pathname; // Current URL without parameters
+    const shareableUrl = `${baseUrl}?${id}`; // Append ID as a parameter
+
+    navigator.clipboard.writeText(shareableUrl).then(() => {
+        button.innerHTML = "✔";
+        setTimeout(() => button.innerHTML = "Copy URL", 1500);
+    });
+}
+
+
+        function verResultados() {
+            alert("Mostrando resultados...");
+        }
+
+        function checkForNewID() {
+            const urlParams = new URLSearchParams(window.location.search);
+            for (let param of urlParams.keys()) {
+                if (param.startsWith("ID")) {
+                    saveID(param);
+                }
+            }
+        }
+
+        function renderStoredIDs() {
+            const storedIDs = getStoredIDs();
+            storedIDs.forEach(id => addCard(id));
+        }
+
+        checkForNewID();
+        renderStoredIDs();
+    </script>
+</body>
+</html>
+
+ 

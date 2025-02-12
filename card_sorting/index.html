@@ -40,13 +40,18 @@
             justify-content: flex-start;
             flex-wrap: wrap;
             min-height: 60px;
-            background: #A090A6;
+            /* background: #ffecec; */
             padding: 10px 20px;
-            border-radius: 8px;
-            border: 2px dashed #656565;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* border-radius: 8px; */
+            /* border: 2px dashed #656565; */
+            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
             box-sizing: border-box;
             position: relative;
+            
+            border-radius: 16px;
+            border: 1px solid var(--neutral-colors-neutral-02, #656565);
+            background: #FFF;
+            box-shadow: 0px 4px 4px 0px #656565;
         }
 
 
@@ -55,6 +60,7 @@
             flex-wrap: wrap;
             gap: 12px;
         }
+
 
         .container {
             display: flex;
@@ -75,18 +81,43 @@
             align-items: center;
             flex-shrink: 0;
         }
+        
+        .category.freeform {
+            border: 2px dashed rgba(101, 101, 101, 0.5); /* Dashed border with less opacity */
+            background: rgba(255, 255, 255, 0.5); /* Slightly transparent background */
+            box-shadow: 0px 4px 4px 0px rgba(101, 101, 101, 0.3); /* Softer shadow */
+        }
+
 
         .card { 
-            background: #ffffff; 
+            /* background: #ffffff;  */
             color: black; 
             padding: 10px 15px; 
-            border-radius: 5px; 
+            /* border-radius: 5px;  */
             cursor: grab; 
             width: 160px; 
             text-align: center; 
             font-size: 14px;
             transition: transform 0.2s;
+            border-radius: 16px;
+            border: 1px solid var(--neutral-colors-neutral-02, #656565);
+            background: #FFF;
+            box-shadow: 0px 4px 4px 0px #656565;
+
         }
+        @media (max-width: 480px) {
+    .card {
+        width: auto; /* Let the card size adapt */
+        min-width: 100px; /* Prevent it from becoming too small */
+        max-width: 75%; /* Avoid taking too much space */
+        font-size: 12px; /* Reduce font size */
+        padding: 8px 10px; /* Adjust padding */
+        word-wrap: break-word; /* Force text to wrap */
+        text-align: center; /* Keep text centered */
+    }
+}
+
+
 
         .card:hover { transform: scale(1.05); }
 
@@ -124,7 +155,9 @@
             alert("⚠️ No URL parameters found. Using default test setup.");
             categorias = ["Category 1", "Category 2"];
             tarjetas = ["Card 1", "Card 2", "Card 3","Card 1", "Card 2", "Card 3","Card 1", "Card 2", "Card 3"];
-            freeform = true;
+            // freeform = true;
+            // ranomly pick freeform or not
+            freeform = Math.random() > 0.5;
         }
 
         const container = document.getElementById("categories-container");
@@ -135,8 +168,16 @@
         if (freeform) {
             addCategoryButton.style.display = "block";
             addCategoryButton.addEventListener("click", addCategory);
-        }
+            categorias = ["__________" , "__________" , "__________" , "__________" , "__________" , "__________" , "__________" , "__________" , "__________" ,]
 
+             // change the style of the categories to make borders between them less visible this is class category
+             const categories = document.querySelectorAll('.category');
+
+            categories.forEach(category => {
+                    category.classList.add('freeform');} )
+    }
+
+    
         function handleDrop(e, div) {
             e.preventDefault();
             const cardId = e.dataTransfer.getData("text/plain");
@@ -157,29 +198,51 @@
         }
 
         function renderCategories() {
-            container.innerHTML = "";
-            categorias.forEach((categoria, index) => {
-                createCategoryElement(categoria, index);
-            });
-        }
+    container.innerHTML = "";
+    categorias.forEach((categoria, index) => {
+        createCategoryElement(categoria, index);
+    });
 
-        function createCategoryElement(categoria, index) {
-            const div = document.createElement("div");
-            div.classList.add("category");
-            div.setAttribute("data-category", categoria);
-            div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
-            div.addEventListener("dragover", e => e.preventDefault());
-            div.addEventListener("drop", e => handleDrop(e, div.querySelector('.cards-container')));
-            container.appendChild(div);
-        }
+    // Apply styles if freeform mode is enabled
+    if (freeform) {
+        document.querySelectorAll('.category').forEach(category => {
+            category.classList.add('freeform');
+        });
+    }
+}
+
+function createCategoryElement(categoria, index) {
+    const div = document.createElement("div");
+    div.classList.add("category");
+    div.setAttribute("data-category", categoria);
+    div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
+    div.addEventListener("dragover", e => e.preventDefault());
+    div.addEventListener("drop", e => handleDrop(e, div.querySelector('.cards-container')));
+
+    // Apply freeform styles when necessary
+    if (freeform) {
+        div.classList.add("freeform");
+    }
+
+    container.appendChild(div);
+}
 
         function addCategory() {
-            const categoryName = prompt("Ingrese el nombre de la nueva categoría:");
-            if (categoryName) {
-                categorias.push(categoryName);
-                createCategoryElement(categoryName, categorias.length - 1);
+            if(freeform) {
+                categorias.push("__________");
+                createCategoryElement("__________", categorias.length - 1);
+
+
             }
+
         }
+        // function addNamedCategory(categoryName) {
+        //     const categoryName = prompt("Enter the name of the category:");
+        //     if (categoryName) {
+        //         categorias.push(categoryName);
+        //         createCategoryElement(categoryName, categorias.length - 1);
+        //     }
+        // }
 
         function renderCards() {
             initialCardsContainer.innerHTML = "";
