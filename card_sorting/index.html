@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Sorting</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400&display=swap">
+    <link rel="stylesheet"  href="./index.css" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League Spartan:wght@500;700&display=swap" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM Serif Text:wght@400&display=swap" />
     <style>
         body { 
             font-family: 'League Spartan', sans-serif; 
-            text-align: center; padding: 20px; background: #f4f4f4; 
+            text-align: center; padding: 20px; background: #ffffff; 
             position: relative;
         }
 
@@ -21,12 +23,14 @@
         }
 
         .button {
-            background: #6200ea;
+            background: #643366;
             color: white;
             border: none;
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
+            font-family: 'League Spartan';
         }
 
         .initial-zone, .category {
@@ -36,14 +40,15 @@
             justify-content: flex-start;
             flex-wrap: wrap;
             min-height: 60px;
-            background: white;
+            background: #A090A6;
             padding: 10px 20px;
             border-radius: 8px;
-            border: 2px dashed #ccc;
+            border: 2px dashed #656565;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
             position: relative;
         }
+
 
         .cards-container {
             display: flex;
@@ -72,8 +77,8 @@
         }
 
         .card { 
-            background: #6200ea; 
-            color: white; 
+            background: #ffffff; 
+            color: black; 
             padding: 10px 15px; 
             border-radius: 5px; 
             cursor: grab; 
@@ -90,20 +95,20 @@
 </head>
 <body>
     <div class="top-buttons">
-        <button class="button" id="finish-button">Terminar</button>
+        <button class="button" id="finish-button">Finish</button>
         <button class="button" id="whatsapp-button">WhatsApp</button>
-        <button class="button" id="add-category-button" style="display: none;">Agregar Categoría</button>
+        <button class="button" id="add-category-button" style="display: none;">Add category</button>
     </div>
 
     <h2>Card Sorting Session</h2>
-    <p>Arrastra las tarjetas a las categorías o regrésalas a la zona inicial.</p>
+    <p>Add and organize categories and cards as you see fit—there's no right or wrong answer.</p>
 
     <div class="initial-zone" id="initial-zone">
         <h3 
         style=
         "margin-right: 10px;
         margin-left: 10px;">
-        Zona de Inicio </h3>
+        Cards </h3>
         <div class="cards-container" id="cards-container"></div>
     </div>
 
@@ -117,8 +122,8 @@
 
         if (!urlParams.has("categorias") && !urlParams.has("tarjetas")) {
             alert("⚠️ No URL parameters found. Using default test setup.");
-            categorias = ["Grupo A", "Grupo B"];
-            tarjetas = ["Tarjeta 1", "Tarjeta 2", "Tarjeta 3","Tarjeta 1", "Tarjeta 2", "Tarjeta 3","Tarjeta 1", "Tarjeta 2", "Tarjeta 3"];
+            categorias = ["Category 1", "Category 2"];
+            tarjetas = ["Card 1", "Card 2", "Card 3","Card 1", "Card 2", "Card 3","Card 1", "Card 2", "Card 3"];
             freeform = true;
         }
 
