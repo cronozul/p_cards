@@ -168,13 +168,11 @@
         if (freeform) {
             addCategoryButton.style.display = "block";
             addCategoryButton.addEventListener("click", addCategory);
-            categorias = ["__________" , "__________" , "__________" , "__________" , "__________" , "__________" , "__________" , "__________" , "__________" ,]
+            categorias = Array(9).fill("__________");
 
-             // change the style of the categories to make borders between them less visible this is class category
-             const categories = document.querySelectorAll('.category');
-
-            categories.forEach(category => {
-                    category.classList.add('freeform');} )
+    document.querySelectorAll('.category').forEach(category => {
+        category.classList.add('freeform');
+    });
     }
 
     
