@@ -286,7 +286,9 @@
         });
       }
 
-      initialZone.addEventListener("dragover", (e) => e.preventDefault());
+      initialZone.addEventListener("dragover", (e) => { e.preventDefault();
+    // make selected card null 
+    selectedCard = null; });
       initialZone.addEventListener("drop", (e) =>
         handleDrop(e, initialCardsContainer)
       );
@@ -344,6 +346,38 @@ document.getElementById("whatsapp-button").addEventListener("click", function ()
     window.open(whatsappURL, "_blank");
 });
 
+      // Card touch event
+      const cards = document.querySelectorAll(".card"); // Replace '.card' with your card selector
+      cards.forEach((card) => {
+        card.addEventListener("click", (e) => {
+          e.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
+
+          // If a card is already selected, deselect it
+          if (selectedCard) {
+            selectedCard.classList.remove("selected");
+          }
+
+          // Select the touched card
+          selectedCard = card;
+          card.classList.add("selected");
+          console.log(selectedCard);
+        });
+      });
+
+      // Category touch event
+      const categories = document.querySelectorAll(".category"); // Replace '.category' with your category selector
+      categories.forEach((category) => {
+        category.addEventListener("click", (e) => {
+          e.preventDefault(); // Prevent default touch behavior
+
+          // If a card is selected, move it to the category
+          if (selectedCard) {
+            category.appendChild(selectedCard);
+            selectedCard.classList.remove("selected");
+            selectedCard = null;
+          }
+        });
+      });
     </script>
   </body>
 </html>
