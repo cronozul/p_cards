@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Card Sorting</title>
-    <link rel="stylesheet" href="./index.css" />
+    <!-- <link rel="stylesheet" href="./index.css" /> -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=League Spartan:wght@500;700&display=swap"
@@ -23,9 +23,6 @@
       }
 
       .top-buttons {
-        position: absolute;
-        top: 10px;
-        right: 10px;
         display: flex;
         /* position: absolute; */
         /* top: 10px; */
@@ -166,6 +163,8 @@
     <div class="container" id="categories-container"></div>
 
     <script>
+      let selectedCard = null;
+
       const urlParams = new URLSearchParams(window.location.search);
       let freeform = urlParams.get("freeform") === "1";
       // TODO consider this boolean filter when sending the survey
@@ -246,7 +245,9 @@
         div.classList.add("category");
         div.setAttribute("data-category", categoria);
         div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
-        div.addEventListener("dragover", (e) => e.preventDefault());
+        div.addEventListener("dragover", (e) => { e.preventDefault();
+    // make selected card null 
+    selectedCard = null; });
         div.addEventListener("drop", (e) =>
           handleDrop(e, div.querySelector(".cards-container"))
         );
@@ -297,54 +298,81 @@
       renderCards();
 
       function generateCompressedCode() {
-    let categories = document.querySelectorAll(".category");
-    let compressedData = [];
-
+    let categories = Array.from(document.querySelectorAll(".category"));
+    
+    // Extract and sort category names
+    let categoryNames = categories.map(category => category.id).sort();
+    
+    // Create dictionary for card assignments using index-based references
+    let cardAssignments = {};
+    
     categories.forEach(category => {
+        let categoryIndex = categoryNames.indexOf(category.id); // Index from sorted list
         let cards = Array.from(category.querySelectorAll(".card"));
-        let cardIndexes = cards.map(card => card.id.replace("card-", ""));
-        compressedData.push(cardIndexes.length ? cardIndexes.join(",") : "-");
+        let cardIds = cards.map(card => card.id.replace("card-", ""));
+        
+        if (cardIds.length) {
+            cardAssignments[categoryIndex] = cardIds;
+        }
     });
 
-    return compressedData.join(";");
+    // Encode data as a JSON string and then Base64
+    let dataString = JSON.stringify({ categories: categoryNames, assignments: cardAssignments });
+    let compressedData = btoa(dataString); // Base64 encoding
+
+    return compressedData;
 }
 
-function checkAllCardsSorted() {
-    let initialCardsContainer = document.getElementById("cards-container");
-    return initialCardsContainer.children.length === 0;
-}
 
-document.getElementById("copy-button").addEventListener("click", function () {
-    if (!checkAllCardsSorted()) {
-        alert("⚠️ Please categorize all cards before copying the link!");
-        return;
-    }
+      function checkAllCardsSorted() {
+        let initialCardsContainer = document.getElementById("cards-container");
+        return initialCardsContainer.children.length === 0;
+      }
 
-    let compressedCode = generateCompressedCode();
-    let shareLink = `${window.location.origin}/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
+      document
+        .getElementById("copy-button")
+        .addEventListener("click", function () {
+          if (!checkAllCardsSorted()) {
+            alert("⚠️ Please categorize all cards before copying the link!");
+            return;
+          }
 
-    navigator.clipboard.writeText(shareLink).then(() => {
-        alert("✅ Link copied to clipboard!");
-    }).catch(err => {
-        console.error("Failed to copy:", err);
-        alert("❌ Error copying the link. Please try again.");
-    });
-});
+          let compressedCode = generateCompressedCode();
+          let shareLink = `${
+            window.location.origin
+          }/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
 
-document.getElementById("whatsapp-button").addEventListener("click", function () {
-    if (!checkAllCardsSorted()) {
-        alert("⚠️ Please categorize all cards before sharing!");
-        return;
-    }
+          navigator.clipboard
+            .writeText(shareLink)
+            .then(() => {
+              alert("✅ Link copied to clipboard!");
+            })
+            .catch((err) => {
+              console.error("Failed to copy:", err);
+              alert("❌ Error copying the link. Please try again.");
+            });
+        });
 
-    let compressedCode = generateCompressedCode();
-    let shareLink = `${window.location.origin}/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
+      document
+        .getElementById("whatsapp-button")
+        .addEventListener("click", function () {
+          if (!checkAllCardsSorted()) {
+            alert("⚠️ Please categorize all cards before sharing!");
+            return;
+          }
 
-    let whatsappMessage = `Here is my response to this card sorting: ${shareLink}`;
-    let whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
+          let compressedCode = generateCompressedCode();
+          let shareLink = `${
+            window.location.origin
+          }/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
 
-    window.open(whatsappURL, "_blank");
-});
+          let whatsappMessage = `Here is my response to this card sorting: ${shareLink}`;
+          let whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+            whatsappMessage
+          )}`;
+
+          window.open(whatsappURL, "_blank");
+        });
 
       // Card touch event
       const cards = document.querySelectorAll(".card"); // Replace '.card' with your card selector
