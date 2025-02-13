@@ -1,54 +1,42 @@
-
-html, body {
-    overflow-y: hidden;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; 
-    box-sizing: border-box;
-}
-
-
-*, *::before, *::after {
-    box-sizing: inherit;
-}
-
-.header-divider-icon {
-    position: absolute;
-    top: 120px;
-    left: calc(50% - 960px);
-    max-height: 100%;
-    width: 1920px;
-}
-.comunidad {
+.team1 {
+    width: 685px;
     position: relative;
     line-height: 66px;
-}
-.comunidad-wrapper {
-    align-self: stretch;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 8px;
-}
-.korem-ipsum-dolor {
-    width: 677px;
-    position: relative;
-    line-height: 22px;
-    font-weight: 500;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: flex;
     align-items: center;
     flex-shrink: 0;
 }
-.korem-ipsum-dolor-sit-amet-co-wrapper {
+.team-wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 8px;
+}
+.uxvault-was-created {
+    width: 677px;
+    position: relative;
+    line-height: 22px;
+    font-weight: 500;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+.uxvault-was-created-by-a-pass-wrapper {
     align-self: stretch;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: 8px;
+    text-align: justify;
     font-size: 22px;
     font-family: 'League Spartan';
 }
@@ -60,33 +48,23 @@ html, body {
     justify-content: flex-start;
     gap: 24px;
 }
-.frame-container {
-    align-self: stretch;
+.frame-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
 }
-.frame-wrapper {
-    width: 709px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 8px;
-    box-sizing: border-box;
-}
-.comunidad-icon {
+.diseador-icon {
     align-self: stretch;
     position: relative;
     max-width: 100%;
     overflow: hidden;
-    height: 222.8px;
+    height: 179px;
     flex-shrink: 0;
     object-fit: cover;
 }
-.comunidad-container {
-    width: 322px;
+.diseador-wrapper {
+    width: 302.3px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -94,15 +72,51 @@ html, body {
     padding: 8px;
     box-sizing: border-box;
 }
+.desarrollador-icon {
+    width: 253px;
+    position: relative;
+    height: 282.5px;
+    object-fit: cover;
+}
 .frame-parent {
     position: absolute;
-    top: 432px;
-    left: calc(50% - 530px);
+    top: calc(50% - 141px);
+    left: calc(50% - 612px);
+    width: 1224px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 29px;
+}
+.decorative-element-icon {
+    position: absolute;
+    top: 510px;
+    left: 0px;
+    width: 76.6px;
+    height: 170.5px;
+}
+.decorative-element-icon1 {
+    position: absolute;
+    top: 206px;
+    left: 0px;
+    width: 480px;
+    height: 230px;
+}
+.decorative-element-icon2 {
+    position: absolute;
+    top: 879.07px;
+    left: 1462px;
+    width: 514.8px;
+    height: 281.6px;
+    object-fit: contain;
+}
+.decorative-element-icon3 {
+    position: absolute;
+    top: 560px;
+    left: 1840.92px;
+    width: 94.7px;
+    height: 177.8px;
+    object-fit: contain;
 }
 .uxvault-logo-icon {
     width: 24px;
@@ -112,6 +126,9 @@ html, body {
 .uxvault {
     position: relative;
     line-height: 38px;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .uxvault-wrapper {
     display: flex;
@@ -131,6 +148,9 @@ html, body {
     position: relative;
     line-height: 18px;
     font-weight: 500;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .outlined-iconsarrow-down {
     width: 24px;
@@ -157,12 +177,11 @@ html, body {
     font-size: 16px;
     font-family: 'League Spartan';
 }
-.header-versin-dark {
+.header-versin-light {
     position: absolute;
-    top: 16px;
+    top: 0px;
     left: calc(50% - 960px);
-    box-shadow: 0px 386px 108px rgba(0, 0, 0, 0), 0px 247px 99px rgba(0, 0, 0, 0.01), 0px 139px 83px rgba(0, 0, 0, 0.05), 0px 62px 62px rgba(0, 0, 0, 0.09), 0px 15px 34px rgba(0, 0, 0, 0.1);
-    background-color: #050505;
+    background-color: #fff;
     width: 1920px;
     display: flex;
     flex-direction: row;
@@ -173,37 +192,15 @@ html, body {
     gap: 320px;
     font-size: 28px;
 }
-.default {
-    position: relative;
-    line-height: 20px;
-}
-.large-buttons {
-    position: absolute;
-    top: 760px;
-    left: calc(50% - 110px);
-    border-radius: 24px;
-    background-color: #643366;
-    width: 220px;
-    height: 56px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 20px;
-    font-family: 'League Spartan';
-}
-.community {
+.team {
     width: 100%;
     position: relative;
-    background-color: #050505;
+    background-color: #fff;
     height: 1080px;
     overflow: hidden;
+    cursor: pointer;
     text-align: left;
     font-size: 56px;
-    color: #fff;
     font-family: 'DM Serif Text';
 }
 

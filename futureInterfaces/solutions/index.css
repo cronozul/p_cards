@@ -1,0 +1,160 @@
+.solutions1 {
+    position: relative;
+    line-height: 66px;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.solutions-wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.finding-answers-in {
+    width: 677px;
+    position: relative;
+    line-height: 22px;
+    font-weight: 500;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.finding-answers-in-one-place-h-wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    text-align: justify;
+    font-size: 22px;
+    font-family: 'League Spartan';
+}
+
+.frame-parent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 24px;
+}
+
+.solutions-inner {
+    position: absolute;
+    top: 200px;
+    left: calc(50% - 808px);
+    width: 1616px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.ux-vault-logo {
+    width: 100px;
+    position: relative;
+    display: block;
+    height: auto;
+}
+
+.uxvault {
+    position: relative;
+    line-height: 38px;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    background-clip: text; /* Standard property */
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent; /* Standard property */
+}
+
+.uxvault-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    padding: 8px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.soluciones1 {
+    position: relative;
+    line-height: 18px;
+    font-weight: 500;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.outlined-iconsarrow-down {
+    width: 24px;
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.soluciones {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    gap: 8px;
+}
+
+.men-de-navegacin {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    font-size: 16px;
+    font-family: 'League Spartan';
+}
+
+.header-versin-light {
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 960px);
+    background-color: #fff;
+    width: 1920px;
+    height: 120px;
+    filter: drop-shadow(0px 386px 108px rgba(0, 0, 0, 0)) drop-shadow(0px 247px 99px rgba(0, 0, 0, 0.01)) drop-shadow(0px 139px 83px rgba(0, 0, 0, 0.05)) drop-shadow(0px 62px 62px rgba(0, 0, 0, 0.09)) drop-shadow(0px 15px 34px rgba(0, 0, 0, 0.1));
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    gap: 320px;
+    font-size: 28px;
+}
+
+.solutions {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 56px;
+    font-family: 'DM Serif Text';
+}

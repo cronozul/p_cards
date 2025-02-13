@@ -4,6 +4,45 @@ body {
     margin: 0;
     padding: 0;
   }
+/* header and logo design for now */
+  .uxvault-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    justify-content: left;
+    padding: 8px;
+    flex: 1; 
+    top: 0px;
+}
+.men-de-navegacin {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    flex: 2;
+}
+.header-versin-light {
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 960px);
+    width: 1920px;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    box-sizing: border-box;
+}
+.outlined-iconsarrow-down {
+  width: 24px;
+  position: relative;
+  height: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
   
   /* Common Text Styles */.card-sorting,.categories,.cards,.uxvault,.projects {
     font-size: 36px;

@@ -1,24 +1,8 @@
-html, body {
-    overflow-y: hidden;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; 
-    box-sizing: border-box;
-}
-.footer-divider-icon {
-    position: absolute;
-    top: 340px;
-    left: 0px;
-    width: 2129.4px;
-    height: 457.3px;
-}
-.soluciones {
+.solutions {
     position: relative;
     line-height: 24px;
 }
-.soluciones-wrapper {
+.solutions-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -28,14 +12,6 @@ html, body {
 .list-item {
     position: relative;
     line-height: 30px;
-}
-.list-item-link-blog-bl-container {
-    align-self: stretch;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
 }
 .frame-group {
     align-self: stretch;
@@ -48,20 +24,38 @@ html, body {
     font-family: 'League Spartan';
 }
 .frame-parent {
-    width: 242px;
+    width: 191px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 16px;
 }
+.list-item-link-our-team-container {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px;
+}
 .frame-container {
-    width: 140px;
+    width: 127px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 16px;
+}
+.frame-parent2 {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    color: #4b5563;
+    font-family: 'League Spartan';
 }
 .frame-parent1 {
     width: 178px;
@@ -72,7 +66,7 @@ html, body {
     gap: 16px;
 }
 .frame-parent3 {
-    width: 127px;
+    width: 140px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -98,6 +92,9 @@ html, body {
 .uxvault {
     position: relative;
     line-height: 38px;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .logo {
     position: absolute;
@@ -110,25 +107,35 @@ html, body {
     gap: 8px;
     font-size: 28px;
 }
-.suscrbete-a-nuestro {
+.subscribe-to-our {
     position: relative;
     line-height: 28px;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-.mantente-al-da-container {
+.stay-up-to {
+    width: 495px;
     position: relative;
     line-height: 36px;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
-.mantente-al-da-sobre-las-noti-wrapper {
+.stay-up-to-date-with-the-lates-wrapper {
     align-self: stretch;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 8px;
     font-family: 'League Spartan';
 }
 .frame-parent5 {
-    width: 431px;
+    width: 516px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -193,19 +200,22 @@ html, body {
     align-items: flex-start;
     justify-content: flex-start;
     text-align: center;
-    color: #4b5563;
     font-family: 'League Spartan';
 }
 .newslater-input {
     position: absolute;
     top: 701px;
-    left: calc(50% - 557px);
+    left: calc(50% - 599.5px);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     gap: 100px;
     font-size: 22px;
+}
+.uxvault-app-all {
+    position: relative;
+    line-height: 28px;
 }
 .frame-parent7 {
     display: flex;
@@ -245,9 +255,8 @@ html, body {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 853px;
+    gap: 985px;
     font-size: 16px;
-    color: #4b5563;
     font-family: 'League Spartan';
 }
 .header-divider-icon {
@@ -257,6 +266,13 @@ html, body {
     max-height: 100%;
     width: 1920px;
 }
+.footer-child {
+    position: absolute;
+    top: 340px;
+    left: 0px;
+    width: 1920px;
+    height: 457px;
+}
 .footer {
     width: 100%;
     position: relative;
@@ -265,7 +281,7 @@ html, body {
     overflow: hidden;
     text-align: left;
     font-size: 18px;
-    color: #050505;
+    color: #4b5563;
     font-family: 'DM Serif Text';
 }
 

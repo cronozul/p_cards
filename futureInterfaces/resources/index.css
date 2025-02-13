@@ -1,0 +1,156 @@
+.resources1 {
+    position: relative;
+    line-height: 66px;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.resources-wrapper {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px;
+}
+.we-understand-that {
+    width: 677px;
+    position: relative;
+    line-height: 22px;
+    font-weight: 500;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+.we-understand-that-clear-and-p-wrapper {
+    width: 692px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-sizing: border-box;
+    text-align: right;
+    font-size: 22px;
+    font-family: 'League Spartan';
+}
+.frame-parent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 24px;
+}
+.resources-inner {
+    position: absolute;
+    top: 680px;
+    left: calc(50% + 118px);
+    width: 728px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.uxvault-logo-icon {
+    width: 24px;
+    position: relative;
+    height: 24px;
+}
+.uxvault {
+    position: relative;
+    line-height: 38px;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.uxvault-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+.soluciones1 {
+    position: relative;
+    line-height: 18px;
+    font-weight: 500;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #050505;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.outlined-iconsarrow-down {
+    width: 24px;
+    position: relative;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.soluciones {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    gap: 8px;
+}
+.men-de-navegacin {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    font-size: 16px;
+    font-family: 'League Spartan';
+}
+.header-versin-light {
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 960px);
+    background-color: #fff;
+    width: 1920px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    gap: 320px;
+    font-size: 28px;
+}
+.decorative-element-icon {
+    position: absolute;
+    top: 802px;
+    left: 0px;
+    width: 640px;
+    height: 278.1px;
+}
+.decorative-element-icon1 {
+    position: absolute;
+    top: 802px;
+    left: 0px;
+    width: 204.9px;
+    height: 244px;
+}
+.resources {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 56px;
+    font-family: 'DM Serif Text';
+}
+
