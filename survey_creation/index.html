@@ -35,7 +35,7 @@
             margin-bottom: 20px;
         }
         .btn {
-            background: #643366;
+            background: #050505;
             color: white;
             border: none;
             padding: 5px 10px;
@@ -61,7 +61,7 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
-            color: #643366;
+            color: #050505;
             font-family: 'League Spartan';
         }
         .category-item, .card-item {
@@ -76,7 +76,7 @@
             gap: 10px;
         }
         .share-btn {
-            background: #643366;
+            background: #050505;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -150,9 +150,28 @@
         return null; // Indicate failure
     }
 
+    saveCardSorting(document.getElementById("survey-title").value, categories, cards);
+    
+
     // Construct URL with "Freeform" before categories
-    return `${window.location.origin}/card_sorting/index.html?${freeform ? "freeform=1&" : ""}categorias=${categories.join(",")}&tarjetas=${cards}`;
+    // return `${window.location.origin}/card_sorting/index.html?${freeform ? "freeform=1&" : ""}categorias=${categories.join(",")}&tarjetas=${cards}`;
+    // pass title as well
+    // lock the survey
+    lockSurvey();
+    return `${window.location.origin}/card_sorting/index.html?${freeform ? "freeform=1&" : ""}categorias=${categories.join(",")}&tarjetas=${cards}&titulo=${document.getElementById("survey-title").value}`;
+
 }
+
+function lockSurvey() {
+    // disable changing name, categories, and cards once the survey is locked
+    document.getElementById("add-category").disabled = true;
+    document.getElementById("add-card").disabled = true;
+    // tile should become non editable but still visible input fields can be done so with readonly
+    document.getElementById("survey-title").readOnly = true;
+    // disable the checkbox
+    document.getElementById("open-card-sorting").disabled = true;
+}
+
 
 // Button to copy to clipboard
 document.getElementById("share-survey").addEventListener("click", function () {
@@ -172,6 +191,17 @@ document.getElementById("redirect-survey").addEventListener("click", function ()
 });
 
 
+function saveCardSorting(title, categories, cards) {
+    let storedSortings = JSON.parse(localStorage.getItem("cardSortings")) || {};
+    
+    if (Object.keys(storedSortings).length >= 5 && !storedSortings[title]) {
+        alert("Maximum of 5 card sortings reached! or the title already exists");
+        return;
+    }
+
+    storedSortings[title] = { categories, cards };
+    localStorage.setItem("cardSortings", JSON.stringify(storedSortings));
+}
 
     </script>
 </body>

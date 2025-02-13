@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Sorting</title>
@@ -14,120 +14,117 @@
       href="https://fonts.googleapis.com/css2?family=DM Serif Text:wght@400&display=swap"
     />
     <style>
-        body { 
+      body {
         font-family: "League Spartan", sans-serif;
         text-align: center;
         padding: 20px;
         background: #ffffff;
-            position: relative;
-        }
+        position: relative;
+      }
 
-        .top-buttons {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            display: flex;
-            gap: 10px;
-        }
+      .top-buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 10px;
+      }
 
-        .button {
-            background: #643366;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
+      .button {
+        background: #643366;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
         font-family: "League Spartan";
-        }
+      }
 
       .initial-zone,
       .category {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            min-height: 60px;
-            /* background: #ffecec; */
-            padding: 10px 20px;
-            /* border-radius: 8px; */
-            /* border: 2px dashed #656565; */
-            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-            box-sizing: border-box;
-            position: relative;
-            
-            border-radius: 16px;
-            border: 1px solid var(--neutral-colors-neutral-02, #656565);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        min-height: 60px;
+        /* background: #ffecec; */
+        padding: 10px 20px;
+        /* border-radius: 8px; */
+        /* border: 2px dashed #656565; */
+        /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+        box-sizing: border-box;
+        position: relative;
+
+        border-radius: 16px;
+        border: 1px solid var(--neutral-colors-neutral-02, #656565);
         background: #fff;
-            box-shadow: 0px 4px 4px 0px #656565;
-        }
+        box-shadow: 0px 4px 4px 0px #656565;
+      }
 
+      .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
 
-        .cards-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+      .container {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        justify-content: flex-start;
+        margin-top: 20px;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+      }
 
+      .category {
+        width: 220px;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-shrink: 0;
+      }
 
-        .container {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            justify-content: flex-start;
-            margin-top: 20px;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding-bottom: 10px;
-        }
-
-        .category { 
-            width: 220px; 
-            min-height: 250px; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        
-        .category.freeform {
-            border: 2px dashed rgba(101, 101, 101, 0.5); /* Dashed border with less opacity */
+      .category.freeform {
+        border: 2px dashed rgba(101, 101, 101, 0.5); /* Dashed border with less opacity */
         background: rgba(
           255,
           255,
           255,
           0.5
         ); /* Slightly transparent background */
-            box-shadow: 0px 4px 4px 0px rgba(101, 101, 101, 0.3); /* Softer shadow */
-        }
+        box-shadow: 0px 4px 4px 0px rgba(101, 101, 101, 0.3); /* Softer shadow */
+      }
 
-
-        .card { 
-            /* background: #ffffff;  */
-            color: black; 
-            padding: 10px 15px; 
-            /* border-radius: 5px;  */
-            cursor: grab; 
-            width: 160px; 
-            text-align: center; 
-            font-size: 14px;
-            transition: transform 0.2s;
-            border-radius: 16px;
-            border: 1px solid var(--neutral-colors-neutral-02, #656565);
+      .card {
+        /* background: #ffffff;  */
+        color: black;
+        padding: 10px 15px;
+        /* border-radius: 5px;  */
+        cursor: grab;
+        width: 160px;
+        text-align: center;
+        font-size: 14px;
+        transition: transform 0.2s;
+        border-radius: 16px;
+        border: 1px solid var(--neutral-colors-neutral-02, #656565);
         background: #fff;
-            box-shadow: 0px 4px 4px 0px #656565;
+        box-shadow: 0px 4px 4px 0px #656565;
+      }
+      @media (max-width: 480px) {
+        .card {
+          width: auto; /* Let the card size adapt */
+          min-width: 100px; /* Prevent it from becoming too small */
+          max-width: 75%; /* Avoid taking too much space */
+          font-size: 12px; /* Reduce font size */
+          padding: 8px 10px; /* Adjust padding */
+          word-wrap: break-word; /* Force text to wrap */
+          text-align: center; /* Keep text centered */
         }
-        @media (max-width: 480px) {
-    .card {
-        width: auto; /* Let the card size adapt */
-        min-width: 100px; /* Prevent it from becoming too small */
-        max-width: 75%; /* Avoid taking too much space */
-        font-size: 12px; /* Reduce font size */
-        padding: 8px 10px; /* Adjust padding */
-        word-wrap: break-word; /* Force text to wrap */
-        text-align: center; /* Keep text centered */
-    }
-}
+      }
 
       .card:hover {
         transform: scale(1.05);
@@ -137,11 +134,11 @@
         opacity: 0.5;
       }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="top-buttons">
       <button class="button" id="copy-button">Finish</button>
-        <button class="button" id="whatsapp-button">WhatsApp</button>
+      <button class="button" id="whatsapp-button">WhatsApp</button>
       <button class="button" id="add-category-button" style="display: none">
         Add category
       </button>
@@ -152,22 +149,23 @@
 
     <div class="initial-zone" id="initial-zone">
       <h3 style="margin-right: 10px; margin-left: 10px">Cards</h3>
-        <div class="cards-container" id="cards-container"></div>
+      <div class="cards-container" id="cards-container"></div>
     </div>
 
     <div class="container" id="categories-container"></div>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        let freeform = urlParams.get("freeform") === "1";
+      const urlParams = new URLSearchParams(window.location.search);
+      let freeform = urlParams.get("freeform") === "1";
+      // TODO consider this boolean filter when sending the survey
       let categorias =
         urlParams.get("categorias")?.split(",").filter(Boolean) || [];
       let tarjetas =
         urlParams.get("tarjetas")?.split(",").filter(Boolean) || [];
 
-        if (!urlParams.has("categorias") && !urlParams.has("tarjetas")) {
-            alert("⚠️ No URL parameters found. Using default test setup.");
-            categorias = ["Category 1", "Category 2"];
+      if (!urlParams.has("categorias") && !urlParams.has("tarjetas")) {
+        alert("⚠️ No URL parameters found. Using default test setup.");
+        categorias = ["Category 1", "Category 2"];
         tarjetas = [
           "Card 1",
           "Card 2",
@@ -179,111 +177,162 @@
           "Card 2",
           "Card 3",
         ];
-            // freeform = true;
-            // ranomly pick freeform or not
-            freeform = Math.random() > 0.5;
-        }
+        // freeform = true;
+        // ranomly pick freeform or not
+        freeform = Math.random() > 0.5;
+      }
 
-        const container = document.getElementById("categories-container");
-        const initialCardsContainer = document.getElementById("cards-container");
-        const initialZone = document.getElementById("initial-zone");
-        const addCategoryButton = document.getElementById("add-category-button");
+      const container = document.getElementById("categories-container");
+      const initialCardsContainer = document.getElementById("cards-container");
+      const initialZone = document.getElementById("initial-zone");
+      const addCategoryButton = document.getElementById("add-category-button");
 
-        if (freeform) {
-            addCategoryButton.style.display = "block";
-            addCategoryButton.addEventListener("click", addCategory);
-            categorias = Array(9).fill("__________");
+      if (freeform) {
+        addCategoryButton.style.display = "block";
+        addCategoryButton.addEventListener("click", addCategory);
+        categorias = Array(9).fill("__________");
 
         document.querySelectorAll(".category").forEach((category) => {
           category.classList.add("freeform");
-    });
-    }
-    
-        function handleDrop(e, div) {
-            e.preventDefault();
-            const cardId = e.dataTransfer.getData("text/plain");
-            const card = document.getElementById(cardId);
-            if (card) {
-                div.appendChild(card);
-            }
-        }
+        });
+      }
 
-        function addDragAndDropListeners(element) {
+      function handleDrop(e, div) {
+        e.preventDefault();
+        const cardId = e.dataTransfer.getData("text/plain");
+        const card = document.getElementById(cardId);
+        if (card) {
+          div.appendChild(card);
+        }
+      }
+
+      function addDragAndDropListeners(element) {
         element.addEventListener("dragstart", (e) => {
-                e.dataTransfer.setData("text/plain", e.target.id);
-                e.target.classList.add("dragging");
-            });
+          e.dataTransfer.setData("text/plain", e.target.id);
+          e.target.classList.add("dragging");
+        });
         element.addEventListener("dragend", (e) => {
-                e.target.classList.remove("dragging");
-            });
-        }
+          e.target.classList.remove("dragging");
+        });
+      }
 
-        function renderCategories() {
-    container.innerHTML = "";
-    categorias.forEach((categoria, index) => {
-        createCategoryElement(categoria, index);
-    });
+      function renderCategories() {
+        container.innerHTML = "";
+        categorias.forEach((categoria, index) => {
+          createCategoryElement(categoria, index);
+        });
 
-    // Apply styles if freeform mode is enabled
-    if (freeform) {
+        // Apply styles if freeform mode is enabled
+        if (freeform) {
           document.querySelectorAll(".category").forEach((category) => {
             category.classList.add("freeform");
-        });
-    }
-}
+          });
+        }
+      }
 
-function createCategoryElement(categoria, index) {
-    const div = document.createElement("div");
-    div.classList.add("category");
-    div.setAttribute("data-category", categoria);
-    div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
+      function createCategoryElement(categoria, index) {
+        const div = document.createElement("div");
+        div.classList.add("category");
+        div.setAttribute("data-category", categoria);
+        div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
         div.addEventListener("dragover", (e) => e.preventDefault());
         div.addEventListener("drop", (e) =>
           handleDrop(e, div.querySelector(".cards-container"))
         );
 
-    // Apply freeform styles when necessary
-    if (freeform) {
-        div.classList.add("freeform");
-    }
-
-    container.appendChild(div);
-}
-
-        function addCategory() {
+        // Apply freeform styles when necessary
         if (freeform) {
-                categorias.push("__________");
-                createCategoryElement("__________", categorias.length - 1);
+          div.classList.add("freeform");
         }
-        }
-        // function addNamedCategory(categoryName) {
-        //     const categoryName = prompt("Enter the name of the category:");
-        //     if (categoryName) {
-        //         categorias.push(categoryName);
-        //         createCategoryElement(categoryName, categorias.length - 1);
-        //     }
-        // }
 
-        function renderCards() {
-            initialCardsContainer.innerHTML = "";
-            tarjetas.forEach((tarjeta, index) => {
-                const card = document.createElement("div");
-                card.classList.add("card");
-                card.setAttribute("draggable", "true");
-                card.setAttribute("id", `card-${index}`);
-                card.innerText = tarjeta;
-                addDragAndDropListeners(card);
-                initialCardsContainer.appendChild(card);
-            });
+        container.appendChild(div);
+      }
+
+      function addCategory() {
+        if (freeform) {
+          categorias.push("__________");
+          createCategoryElement("__________", categorias.length - 1);
         }
+      }
+      // function addNamedCategory(categoryName) {
+      //     const categoryName = prompt("Enter the name of the category:");
+      //     if (categoryName) {
+      //         categorias.push(categoryName);
+      //         createCategoryElement(categoryName, categorias.length - 1);
+      //     }
+      // }
+
+      function renderCards() {
+        initialCardsContainer.innerHTML = "";
+        tarjetas.forEach((tarjeta, index) => {
+          const card = document.createElement("div");
+          card.classList.add("card");
+          card.setAttribute("draggable", "true");
+          card.setAttribute("id", `card-${index}`);
+          card.innerText = tarjeta;
+          addDragAndDropListeners(card);
+          initialCardsContainer.appendChild(card);
+        });
+      }
 
       initialZone.addEventListener("dragover", (e) => e.preventDefault());
       initialZone.addEventListener("drop", (e) =>
         handleDrop(e, initialCardsContainer)
       );
 
-        renderCategories();
-        renderCards();
+      renderCategories();
+      renderCards();
+
+      function generateCompressedCode() {
+    let categories = document.querySelectorAll(".category");
+    let compressedData = [];
+
+    categories.forEach(category => {
+        let cards = Array.from(category.querySelectorAll(".card"));
+        let cardIndexes = cards.map(card => card.id.replace("card-", ""));
+        compressedData.push(cardIndexes.length ? cardIndexes.join(",") : "-");
+    });
+
+    return compressedData.join(";");
+}
+
+function checkAllCardsSorted() {
+    let initialCardsContainer = document.getElementById("cards-container");
+    return initialCardsContainer.children.length === 0;
+}
+
+document.getElementById("copy-button").addEventListener("click", function () {
+    if (!checkAllCardsSorted()) {
+        alert("⚠️ Please categorize all cards before copying the link!");
+        return;
+    }
+
+    let compressedCode = generateCompressedCode();
+    let shareLink = `${window.location.origin}/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
+
+    navigator.clipboard.writeText(shareLink).then(() => {
+        alert("✅ Link copied to clipboard!");
+    }).catch(err => {
+        console.error("Failed to copy:", err);
+        alert("❌ Error copying the link. Please try again.");
+    });
+});
+
+document.getElementById("whatsapp-button").addEventListener("click", function () {
+    if (!checkAllCardsSorted()) {
+        alert("⚠️ Please categorize all cards before sharing!");
+        return;
+    }
+
+    let compressedCode = generateCompressedCode();
+    let shareLink = `${window.location.origin}/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
+
+    let whatsappMessage = `Here is my response to this card sorting: ${shareLink}`;
+    let whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
+
+    window.open(whatsappURL, "_blank");
+});
+
     </script>
-</body>
+  </body>
 </html>

@@ -3,8 +3,10 @@
 <head>
   	<meta charset="utf-8">
   	<meta name="viewport" content="initial-scale=1, width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   	
   	<link rel="stylesheet"  href="./index.css" />
+	  <link rel="stylesheet"  href="./global.css" />
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League Spartan:wght@500;700&display=swap" />
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM Serif Text:wght@400&display=swap" />
   	
@@ -27,34 +29,32 @@
     		<img class="decorative-element-icon4" alt="" src="/img/Vector (5).svg">
 
 			
-    		
-    		<div class="header-versin-light">
+    		<div class="uxvault-wrapper">
+				<img src="img/ux-vault-logo.svg" alt="UX Vault Logo" class="ux-vault-logo">
 
-			
-      			<div class="men-de-navegacin">
-
-					
+					<div class="header-versin-light">
+						<div class="men-de-navegacin">
+							 
 
 					
         				<div class="soluciones">
           					<div class="soluciones1">Solutions</div>
           					<img class="outlined-iconsarrow-down" alt="" src="/img/arrow down.svg">
           					
-        				</div>
-        				<div class="soluciones">
-          					<div class="soluciones1">Resources</div>
-          					<img class="outlined-iconsarrow-down" alt="" src="/img/arrow down.svg">
+						</div>
+						<div class="soluciones">
+							  <div class="soluciones1">Team</div>
+							  <img class="outlined-iconsarrow-down" alt="" src="/img/arrow down.svg">
+							</div>
+						<div class="soluciones">
+							  <div class="soluciones1">Community</div>
+							  <img class="outlined-iconsarrow-down" alt="" src="/img/arrow down.svg">
+							</div>
+							  <div class="soluciones">
+									<div class="soluciones1">Resources</div>
+									<img class="outlined-iconsarrow-down" alt="" src="/img/arrow down.svg">
           					
-        				</div>
-        				<div class="soluciones">
-          					<div class="soluciones1">Community</div>
-          					<img class="outlined-iconsarrow-down" alt="" src="/img/arrow down.svg">
-          					
-        				</div>
-        				<div class="soluciones">
-          					<div class="soluciones1">Team</div>
-          					<img class="outlined-iconsarrow-down" alt="" src="/img/arrow down.svg">
-          					
+								</div>
         				</div>
 
 						
@@ -77,14 +77,13 @@
 				<b class="default">
 					
 					<!-- redirect to  html in /survey_creation -->
-					<href="/survey_creation/index.html">
-					Get started
-
-
+					Create a card sorting
 				</b>
     		</div>
     		<div class="medium-buttons" id="mediumButtonsContainer">
-      			<b class="default1">Learn more</b>
+      			<b class="default1">
+				    Learn more
+				</b>
     		</div>
   	</div>
   	
@@ -105,6 +104,8 @@
     		if(mediumButtonsContainer) {
       			mediumButtonsContainer.addEventListener("click", function (e) {
         				// Add your code here
+						window.location.href = "/solutions/index.html";
+
       			});
     		}</script></body>
 </html>
