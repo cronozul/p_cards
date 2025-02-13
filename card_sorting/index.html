@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Card Sorting</title>
     <link rel="stylesheet" href="./index.css" />
     <link
@@ -27,7 +27,12 @@
         top: 10px;
         right: 10px;
         display: flex;
+        /* position: absolute; */
+        /* top: 10px; */
+        /* right: 10px; */
+        /* display: flex; */
         gap: 10px;
+        justify-content: flex-end;
       }
 
       .button {
@@ -45,6 +50,7 @@
       .category {
         display: flex;
         align-items: center;
+        align-content: center;
         justify-content: flex-start;
         flex-wrap: wrap;
         min-height: 60px;
@@ -89,14 +95,15 @@
       }
 
       .category.freeform {
-        border: 2px dashed rgba(101, 101, 101, 0.5); /* Dashed border with less opacity */
+        border: 2px dashed rgba(101, 101, 101, 0.091); /* Dashed border with less opacity */
         background: rgba(
           255,
           255,
           255,
           0.5
         ); /* Slightly transparent background */
-        box-shadow: 0px 4px 4px 0px rgba(101, 101, 101, 0.3); /* Softer shadow */
+        box-shadow: 0px 4px 4px 0px rgba(101, 101, 101, 0.144); /* Softer shadow */
+        color: rgba(101, 101, 101, 0.3);
       }
 
       .card {
@@ -104,6 +111,7 @@
         color: black;
         padding: 10px 15px;
         /* border-radius: 5px;  */
+        margin: 5px;
         cursor: grab;
         width: 160px;
         text-align: center;
@@ -145,7 +153,10 @@
     </div>
 
     <h2>Card Sorting Session</h2>
-    <p>Add and organize categories and cards as you see fit—there's no right or wrong answer.</p>
+    <p>
+      Add and organize categories and cards as you see fit—there's no right or
+      wrong answer.
+    </p>
 
     <div class="initial-zone" id="initial-zone">
       <h3 style="margin-right: 10px; margin-left: 10px">Cards</h3>
