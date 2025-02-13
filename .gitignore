@@ -1,1 +1,14 @@
 .vscode/settings.json
+# ignore resources respon sign up solutions survey original style footer community and team folders 
+community/index.css
+community/index.html
+footer/index.css
+footer/index.html
+resources/index.css
+resources/index.html
+respon/index.css
+respon/testRespon.css
+respon/testRespon.html
+survey original style/index.html
+team/index.css
+team/index.html
