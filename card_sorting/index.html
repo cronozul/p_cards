@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Sorting</title>
-    <link rel="stylesheet"  href="./index.css" />
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League Spartan:wght@500;700&display=swap" />
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM Serif Text:wght@400&display=swap" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=League Spartan:wght@500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM Serif Text:wght@400&display=swap"
+    />
     <style>
         body { 
-            font-family: 'League Spartan', sans-serif; 
-            text-align: center; padding: 20px; background: #ffffff; 
+        font-family: "League Spartan", sans-serif;
+        text-align: center;
+        padding: 20px;
+        background: #ffffff;
             position: relative;
         }
 
@@ -30,11 +38,11 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 14px;
-            font-family: 'League Spartan';
+        font-family: "League Spartan";
         }
 
-        .initial-zone, .category {
-
+      .initial-zone,
+      .category {
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -50,7 +58,7 @@
             
             border-radius: 16px;
             border: 1px solid var(--neutral-colors-neutral-02, #656565);
-            background: #FFF;
+        background: #fff;
             box-shadow: 0px 4px 4px 0px #656565;
         }
 
@@ -84,7 +92,12 @@
         
         .category.freeform {
             border: 2px dashed rgba(101, 101, 101, 0.5); /* Dashed border with less opacity */
-            background: rgba(255, 255, 255, 0.5); /* Slightly transparent background */
+        background: rgba(
+          255,
+          255,
+          255,
+          0.5
+        ); /* Slightly transparent background */
             box-shadow: 0px 4px 4px 0px rgba(101, 101, 101, 0.3); /* Softer shadow */
         }
 
@@ -101,9 +114,8 @@
             transition: transform 0.2s;
             border-radius: 16px;
             border: 1px solid var(--neutral-colors-neutral-02, #656565);
-            background: #FFF;
+        background: #fff;
             box-shadow: 0px 4px 4px 0px #656565;
-
         }
         @media (max-width: 480px) {
     .card {
@@ -117,29 +129,29 @@
     }
 }
 
+      .card:hover {
+        transform: scale(1.05);
+      }
 
-
-        .card:hover { transform: scale(1.05); }
-
-        .dragging { opacity: 0.5; }
+      .dragging {
+        opacity: 0.5;
+      }
     </style>
 </head>
 <body>
     <div class="top-buttons">
-        <button class="button" id="finish-button">Finish</button>
+      <button class="button" id="copy-button">Finish</button>
         <button class="button" id="whatsapp-button">WhatsApp</button>
-        <button class="button" id="add-category-button" style="display: none;">Add category</button>
+      <button class="button" id="add-category-button" style="display: none">
+        Add category
+      </button>
     </div>
 
     <h2>Card Sorting Session</h2>
     <p>Add and organize categories and cards as you see fit—there's no right or wrong answer.</p>
 
     <div class="initial-zone" id="initial-zone">
-        <h3 
-        style=
-        "margin-right: 10px;
-        margin-left: 10px;">
-        Cards </h3>
+      <h3 style="margin-right: 10px; margin-left: 10px">Cards</h3>
         <div class="cards-container" id="cards-container"></div>
     </div>
 
@@ -148,13 +160,25 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         let freeform = urlParams.get("freeform") === "1";
-        let categorias = urlParams.get("categorias")?.split(",").filter(Boolean) || [];
-        let tarjetas = urlParams.get("tarjetas")?.split(",").filter(Boolean) || [];
+      let categorias =
+        urlParams.get("categorias")?.split(",").filter(Boolean) || [];
+      let tarjetas =
+        urlParams.get("tarjetas")?.split(",").filter(Boolean) || [];
 
         if (!urlParams.has("categorias") && !urlParams.has("tarjetas")) {
             alert("⚠️ No URL parameters found. Using default test setup.");
             categorias = ["Category 1", "Category 2"];
-            tarjetas = ["Card 1", "Card 2", "Card 3","Card 1", "Card 2", "Card 3","Card 1", "Card 2", "Card 3"];
+        tarjetas = [
+          "Card 1",
+          "Card 2",
+          "Card 3",
+          "Card 1",
+          "Card 2",
+          "Card 3",
+          "Card 1",
+          "Card 2",
+          "Card 3",
+        ];
             // freeform = true;
             // ranomly pick freeform or not
             freeform = Math.random() > 0.5;
@@ -170,11 +194,10 @@
             addCategoryButton.addEventListener("click", addCategory);
             categorias = Array(9).fill("__________");
 
-    document.querySelectorAll('.category').forEach(category => {
-        category.classList.add('freeform');
+        document.querySelectorAll(".category").forEach((category) => {
+          category.classList.add("freeform");
     });
     }
-
     
         function handleDrop(e, div) {
             e.preventDefault();
@@ -186,11 +209,11 @@
         }
 
         function addDragAndDropListeners(element) {
-            element.addEventListener("dragstart", e => {
+        element.addEventListener("dragstart", (e) => {
                 e.dataTransfer.setData("text/plain", e.target.id);
                 e.target.classList.add("dragging");
             });
-            element.addEventListener("dragend", e => {
+        element.addEventListener("dragend", (e) => {
                 e.target.classList.remove("dragging");
             });
         }
@@ -203,8 +226,8 @@
 
     // Apply styles if freeform mode is enabled
     if (freeform) {
-        document.querySelectorAll('.category').forEach(category => {
-            category.classList.add('freeform');
+          document.querySelectorAll(".category").forEach((category) => {
+            category.classList.add("freeform");
         });
     }
 }
@@ -214,8 +237,10 @@ function createCategoryElement(categoria, index) {
     div.classList.add("category");
     div.setAttribute("data-category", categoria);
     div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
-    div.addEventListener("dragover", e => e.preventDefault());
-    div.addEventListener("drop", e => handleDrop(e, div.querySelector('.cards-container')));
+        div.addEventListener("dragover", (e) => e.preventDefault());
+        div.addEventListener("drop", (e) =>
+          handleDrop(e, div.querySelector(".cards-container"))
+        );
 
     // Apply freeform styles when necessary
     if (freeform) {
@@ -226,13 +251,10 @@ function createCategoryElement(categoria, index) {
 }
 
         function addCategory() {
-            if(freeform) {
+        if (freeform) {
                 categorias.push("__________");
                 createCategoryElement("__________", categorias.length - 1);
-
-
-            }
-
+        }
         }
         // function addNamedCategory(categoryName) {
         //     const categoryName = prompt("Enter the name of the category:");
@@ -255,8 +277,10 @@ function createCategoryElement(categoria, index) {
             });
         }
 
-        initialZone.addEventListener("dragover", e => e.preventDefault());
-        initialZone.addEventListener("drop", e => handleDrop(e, initialCardsContainer));
+      initialZone.addEventListener("dragover", (e) => e.preventDefault());
+      initialZone.addEventListener("drop", (e) =>
+        handleDrop(e, initialCardsContainer)
+      );
 
         renderCategories();
         renderCards();
