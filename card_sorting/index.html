@@ -43,6 +43,7 @@
       }
 
       .top-buttons {
+        margin-top: 5px;
         display: flex;
         /* position: absolute; */
         /* top: 10px; */
@@ -71,6 +72,7 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         min-height: 60px;
+        min-width: 100px;
         /* background: #ffecec; */
         padding: 10px 20px;
         /* border-radius: 8px; */
@@ -106,11 +108,19 @@
 
       .category {
         width: 220px;
-        min-height: 250px;
+        min-height: 200px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         flex-shrink: 0;
+        /* gap: 1px; */
+        align-content: flex-start;
+        justify-content: center;
+
+
+
+
+
       }
 
       .category.freeform {
@@ -145,6 +155,7 @@
         display: flex;
         flex-wrap: wrap; /* Ensure cards wrap */
         gap: 8px;
+        justify-content: center;
       }
 
       .card {
@@ -193,19 +204,14 @@
   </head>
   <body>
     <div page>
-      <div class="top-buttons">
-        <button class="button" id="copy-button">Finish</button>
-        <button class="button" id="whatsapp-button">WhatsApp</button>
-        <button class="button" id="add-category-button" style="display: none">
-          Add category
-        </button>
-      </div>
+
       <div class="scroll-indicator">Scroll ➡️ to see all categories</div>
 
-      <h2>Card Sorting Session</h2>
+      <h2 style="
+    margin-top: 0px;
+">Card Sorting Session</h2>
       <p id="description">
-        Add and organize categories and cards as you see fit—there's no right or
-        wrong answer. Touch the cards and then the categories to classify them.
+        Add and organize categories and cards freely—there's no right or wrong way! Tap a card, then tap the top of a category box to classify it.
       </p>
 
       <div class="initial-zone" id="initial-zone">
@@ -213,6 +219,13 @@
       </div>
 
       <div class="container" id="categories-container"></div>
+    </div>
+    <div class="top-buttons">
+      <button class="button" id="copy-button">Share</button>
+      <button class="button" id="whatsapp-button">WhatsApp</button>
+      <button class="button" id="add-category-button" style="display: none">
+        Add category
+      </button>
     </div>
     <script>
       const indicator = document.querySelector(".scroll-indicator");
@@ -223,9 +236,7 @@
       function hideIndicator() {
         indicator.style.opacity = "0";
         setTimeout(() => (indicator.style.display = "none"), 500);
-        // don't remove listeners in case the categories get created or resizing of window
-        // scrollContainer.removeEventListener('scroll', hideIndicator);
-        // scrollContainer.removeEventListener('pointermove', detectDrag);
+
       }
 
       function detectDrag(event) {
@@ -273,17 +284,8 @@
       if (!urlParams.has("categorias") && !urlParams.has("tarjetas")) {
         alert("⚠️ No URL parameters found. Using default test setup.");
         categorias = ["Category 1", "Category 2"];
-        tarjetas = [
-          "Card 1",
-          "Card 2",
-          "Card 3",
-          "Card 1",
-          "Card 2",
-          "Card 3",
-          "Card 1",
-          "Card 2",
-          "Card 3",
-        ];
+        sufix = "Card "
+        tarjetas = Array(7).fill().map((_, i) => `${sufix}${i + 1}`);
         // freeform = true;
         // ranomly pick freeform or not
         freeform = Math.random() > 0.5;
@@ -338,27 +340,7 @@
         }
       }
 
-      // function createCategoryElement(categoria, index) {
-      //   const div = document.createElement("div");
-      //   div.classList.add("category");
-      //   div.setAttribute("data-category", categoria);
-      //   div.innerHTML = `<h4>${categoria}</h4><div class='cards-container' id='category-${index}'></div>`;
-      //   div.addEventListener("dragover", (e) => {
-      //     e.preventDefault();
-      //     // make selected card null
-      //     selectedCard = null;
-      //   });
-      //   div.addEventListener("drop", (e) =>
-      //     handleDrop(e, div.querySelector(".cards-container"))
-      //   );
 
-      //   // Apply freeform styles when necessary
-      //   if (freeform) {
-      //     div.classList.add("freeform");
-      //   }
-
-      //   container.appendChild(div);
-      // }
 
       function addCategory() {
         if (freeform) {
@@ -366,36 +348,6 @@
           createCategoryElement("_ _ _ _ _ _", categorias.length - 1);
         }
       }
-      // function addNamedCategory(categoryName) {
-      //     const categoryName = prompt("Enter the name of the category:");
-      //     if (categoryName) {
-      //         categorias.push(categoryName);
-      //         createCategoryElement(categoryName, categorias.length - 1);
-      //     }
-      // }
-
-      // function renderCards() {
-      //   // create a title that will be inside card container
-      //   title = "Cards:";
-      //   const titleElement = document.createElement("h4");
-
-      //   // add style so it's width and padding are equal to the cards
-      //   // put as margin only 5px
-      //   titleElement.style.margin = "5px";
-      //   titleElement.style.height = "fit-content";
-      //   initialCardsContainer.innerHTML = "";
-      //   titleElement.innerText = title;
-      //   initialCardsContainer.appendChild(titleElement);
-      //   tarjetas.forEach((tarjeta, index) => {
-      //     const card = document.createElement("div");
-      //     card.classList.add("card");
-      //     card.setAttribute("draggable", "true");
-      //     card.setAttribute("id", `card-${index}`);
-      //     card.innerText = tarjeta;
-      //     addDragAndDropListeners(card);
-      //     initialCardsContainer.appendChild(card);
-      //   });
-      // }
 
       function renderCards() {
   title = "Cards:";
@@ -415,15 +367,7 @@
 
     addDragAndDropListeners(card);
 
-    // // Add click event listener to select card
-    // card.addEventListener("click", (e) => {
-    //   e.preventDefault();
-    //   if (selectedCard) {
-    //     selectedCard.classList.remove("selected");
-    //   }
-    //   selectedCard = card;
-    //   card.classList.add("selected");
-    // });
+
 
     initialCardsContainer.appendChild(card);
   });
@@ -434,7 +378,7 @@ function createCategoryElement(categoria, index) {
   const div = document.createElement("div");
   div.classList.add("category");
   div.setAttribute("data-category", categoria);
-  div.innerHTML = `<h4>${categoria}</h4><div class='cards-container' id='category-${index}'></div>`;
+  div.innerHTML = `<h4 style=width:100%>${categoria}</h4><div class='cards-container' id='category-${index}'></div>`;
 
   div.addEventListener("dragover", (e) => e.preventDefault());
   div.addEventListener("drop", (e) => handleDrop(e, div.querySelector(".cards-container")));
@@ -442,15 +386,6 @@ function createCategoryElement(categoria, index) {
   // Apply freeform styles if needed
   if (freeform) div.classList.add("freeform");
 
-  // // Add click event listener to move selected card into the category
-  // div.addEventListener("click", (e) => {
-  //   e.preventDefault();
-  //   if (selectedCard) {
-  //     div.querySelector(".cards-container").appendChild(selectedCard);
-  //     selectedCard.classList.remove("selected");
-  //     selectedCard = null;
-  //   }
-  // });
 
   container.appendChild(div);
 }
@@ -498,7 +433,7 @@ function createCategoryElement(categoria, index) {
 
       function checkAllCardsSorted() {
         let initialCardsContainer = document.getElementById("cards-container");
-        return initialCardsContainer.children.length === 0;
+        return initialCardsContainer.children.length === 1
       }
 
       document
@@ -524,80 +459,57 @@ function createCategoryElement(categoria, index) {
               alert("❌ Error copying the link. Please try again.");
             });
         });
+        document
+  .getElementById("whatsapp-button")
+  .addEventListener("click", function () {
+    if (!checkAllCardsSorted()) {
+      alert("⚠️ Please categorize all cards before sharing!");
+      return;
+    }
 
-      document
-        .getElementById("whatsapp-button")
-        .addEventListener("click", function () {
-          if (!checkAllCardsSorted()) {
-            alert("⚠️ Please categorize all cards before sharing!");
-            return;
-          }
+    let compressedCode = generateCompressedCode();
+    let shareLink = `${
+      window.location.origin
+    }/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
 
-          let compressedCode = generateCompressedCode();
-          let shareLink = `${
-            window.location.origin
-          }/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
+    let whatsappMessage = `Here is my response to this card sorting: ${shareLink}`;
 
-          let whatsappMessage = `Here is my response to this card sorting: ${shareLink}`;
-          let whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-            whatsappMessage
-          )}`;
+    let whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
 
-          window.open(whatsappURL, "_blank");
-        });
-
-      // Card touch event
+    window.open(whatsappURL, "_blank");
+  });
       const cards = document.querySelectorAll(".card"); // Replace '.card' with your card selector
-      // cards.forEach((card) => {
-      //   card.addEventListener("click", (e) => {
-      //     e.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
 
-      //     // If a card is already selected, deselect it
-      //     if (selectedCard) {
-      //       selectedCard.classList.remove("selected");
-      //     }
-
-      //     // Select the touched card
-      //     selectedCard = card;
-      //     card.classList.add("selected");
-      //     console.log(selectedCard);
-      //   });
-      // });
-
-      // Category touch event
-      // const categories = document.querySelectorAll(".category"); // Replace '.category' with your category selector
-      // categories.forEach((category) => {
-      //   category.addEventListener("click", (e) => {
-      //     e.preventDefault(); // Prevent default touch behavior
-
-      //     // If a card is selected, move it to the category
-      //     if (selectedCard) {
-      //       category.appendChild(selectedCard);
-      //       selectedCard.classList.remove("selected");
-      //       selectedCard = null;
-      //     }
-      //   });
-      // });
 
       document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("card")) {
+  const card = e.target.closest(".card"); // Ensure we always get the `.card` element
+  let category = e.target.closest(".category"); // Ensure we get the `.category` element
+  // check also the initial zone
+  category = category || e.target.closest(".initial-zone");
+
+  if (card) {
     e.preventDefault();
     if (selectedCard) {
       selectedCard.classList.remove("selected");
     }
-    selectedCard = e.target;
+    selectedCard = card;
     selectedCard.classList.add("selected");
   }
 
-  if (e.target.classList.contains("category")) {
+  else if (category) {
     e.preventDefault();
-    if (selectedCard) {
-      e.target.appendChild(selectedCard);
+    const child = category.querySelector(".cards-container");
+
+    if (selectedCard && child) {
+      child.appendChild(selectedCard);
       selectedCard.classList.remove("selected");
       selectedCard = null;
     }
   }
 });
+
     </script>
   </body>
 </html>
