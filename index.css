@@ -8,7 +8,13 @@ html, body {
     box-sizing: border-box;
 }
 
-
+@media (max-width: 760px) {
+    .homepage img.decorative-element-icon1,
+    .homepage img.vector-icon,
+    .main-content .subtitle-container {
+      display: none;
+  }
+}
 .decorative-element-icon {
     position: absolute;
     top: 304px;
@@ -75,13 +81,15 @@ html, body {
     height: 230px;
 }
 .title {
-    flex: 1;
-    position: relative;
+    /* flex: 1; */
+    /* position: relative; */
     line-height: 90px;
+    white-space: pre-wrap;
 }
 .title-container {
-    width: 1236px;
+    /* width: 1236px; */
     display: flex;
+    margin-top: auto;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -89,7 +97,7 @@ html, body {
     box-sizing: border-box;
 }
 .subtitle {
-    position: relative;
+    /* position: relative; */
     line-height: 46px;
     white-space: pre-wrap;
 }
@@ -101,27 +109,31 @@ html, body {
     justify-content: center;
     padding: 8px;
     font-size: 36px;
+    align-content: center;
 }
 .main-content {
-    position: absolute;
+    /* position: relative; */
     top: 264px;
     left: calc(50% - 618px);
-    width: 1236px;
+    /* width: 1236px; */
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 32px;
+    justify-content: center;
+    gap: 40px;
     text-align: center;
     font-size: 90px;
     font-family: 'DM Serif Text';
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 .default {
     position: relative;
     line-height: 20px;
 }
 .large-buttons {
-    position: absolute;
+    /* position: absolute; */
     top: 774px;
     left: 758px;
     border-radius: 24px;
@@ -143,7 +155,7 @@ html, body {
     line-height: 20px;
 }
 .medium-buttons {
-    position: absolute;
+    /* position: absolute; */
     top: 774px;
     left: 1002px;
     border-radius: 16px;
@@ -172,3 +184,7 @@ html, body {
     font-family: 'League Spartan';
 }
 
+.buttons {
+    display: flex;
+    gap: 0.3em;
+}
