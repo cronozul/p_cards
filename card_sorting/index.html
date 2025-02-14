@@ -14,6 +14,26 @@
       href="https://fonts.googleapis.com/css2?family=DM Serif Text:wght@400&display=swap"
     />
     <style>
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        50% {
+          transform: translateX(10px);
+        }
+      }
+
+      .scroll-indicator {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        font-size: 24px;
+        color: black;
+        animation: bounce 1s infinite;
+        transition: opacity 0.5s ease-out;
+      }
       body {
         font-family: "League Spartan", sans-serif;
         text-align: center;
@@ -63,18 +83,20 @@
         border: 1px solid var(--neutral-colors-neutral-02, #656565);
         background: #fff;
         box-shadow: 0px 4px 4px 0px #656565;
+        margin: 10px;
       }
 
       .cards-container {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
+        align-items: center;
       }
 
       .container {
         display: flex;
         flex-direction: row;
-        gap: 20px;
+        gap: auto;
         justify-content: flex-start;
         margin-top: 20px;
         overflow-x: auto;
@@ -103,14 +125,37 @@
         color: rgba(101, 101, 101, 0.3);
       }
 
+      /* correct wrapping */
+
+      .initial-zone {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping */
+        align-items: center; /* Align elements properly */
+        gap: 8px; /* Space between elements */
+      }
+
+      .title {
+        display: inline-block;
+        margin-right: 10px;
+        margin-left: 10px;
+        white-space: nowrap; /* Prevent title from wrapping unnecessarily */
+      }
+
+      .cards-container {
+        display: flex;
+        flex-wrap: wrap; /* Ensure cards wrap */
+        gap: 8px;
+      }
+
       .card {
         /* background: #ffffff;  */
         color: black;
         padding: 10px 15px;
         /* border-radius: 5px;  */
-        margin: 5px;
+        /* margin: 5px; */
         cursor: grab;
-        width: 160px;
+        width: fit-content;
+        height: fit-content;
         text-align: center;
         font-size: 14px;
         transition: transform 0.2s;
@@ -121,10 +166,12 @@
       }
       @media (max-width: 480px) {
         .card {
-          width: auto; /* Let the card size adapt */
-          min-width: 100px; /* Prevent it from becoming too small */
+          width: fit-content;
+          height: fit-content;
+          /* width: auto; Let the card size adapt */
+          min-width: 50px; /* Prevent it from becoming too small */
           max-width: 75%; /* Avoid taking too much space */
-          font-size: 12px; /* Reduce font size */
+          font-size: 10px; /* Reduce font size */
           padding: 8px 10px; /* Adjust padding */
           word-wrap: break-word; /* Force text to wrap */
           text-align: center; /* Keep text centered */
@@ -138,48 +185,76 @@
       .dragging {
         opacity: 0.5;
       }
+      .page {
+        max-width: 100vw;
+        max-height: 100vh;
+      }
     </style>
   </head>
   <body>
-    <div class="top-buttons">
-      <button class="button" id="copy-button">Finish</button>
-      <button class="button" id="whatsapp-button">WhatsApp</button>
-      <button class="button" id="add-category-button" style="display: none">
-        Add category
-      </button>
+    <div page>
+      <div class="top-buttons">
+        <button class="button" id="copy-button">Finish</button>
+        <button class="button" id="whatsapp-button">WhatsApp</button>
+        <button class="button" id="add-category-button" style="display: none">
+          Add category
+        </button>
+      </div>
+      <div class="scroll-indicator">Scroll ➡️ to see all categories</div>
+
+      <h2>Card Sorting Session</h2>
+      <p id="description">
+        Add and organize categories and cards as you see fit—there's no right or
+        wrong answer. Touch the cards and then the categories to classify them.
+      </p>
+
+      <div class="initial-zone" id="initial-zone">
+        <div class="cards-container" id="cards-container"></div>
+      </div>
+
+      <div class="container" id="categories-container"></div>
     </div>
-
-    <h2>Card Sorting Session</h2>
-    <p id="description">
-      Add and organize categories and cards as you see fit—there's no right or
-      wrong answer.
-      Touch the cards and then the categories to classify them.
-    </p>
-
-    <div class="initial-zone" id="initial-zone">
-      <h3 style="margin-right: 10px; margin-left: 10px">Cards</h3>
-      <div class="cards-container" id="cards-container"></div>
-    </div>
-
-    <div class="container" id="categories-container"></div>
-
     <script>
-      // detect if user can drap and drop use size of screen as proxy
-      function isDragAndDropSupported() {
-        return window.innerWidth > 1000;
+      const indicator = document.querySelector(".scroll-indicator");
+      const scrollContainer = document.querySelector(".container");
+
+      let isDragging = false;
+
+      function hideIndicator() {
+        indicator.style.opacity = "0";
+        setTimeout(() => (indicator.style.display = "none"), 500);
+        // don't remove listeners in case the categories get created or resizing of window
+        // scrollContainer.removeEventListener('scroll', hideIndicator);
+        // scrollContainer.removeEventListener('pointermove', detectDrag);
       }
-      // if it is not supported add a message to the user
-      // touch the cards and then the categories to classify them
-      // else ask them to drag and drop
-      //  add this to class description
-      // if (!isDragAndDropSupported()) {
-      //  [0].innerText =
-      //     "Touch the cards and then the categories to classify them.";
-      // }
-      // else {
-      //  [0].innerText =
-      //     "Drag and drop the cards and then the categories to classify them.";
-      // }
+
+      function detectDrag(event) {
+        if (isDragging) {
+          hideIndicator();
+        }
+      }
+
+      function checkScrollability() {
+        const isScrollable =
+          scrollContainer.scrollLeftMax > 0 ||
+          scrollContainer.scrollWidth > scrollContainer.clientWidth;
+        indicator.style.display = isScrollable ? "block" : "none";
+      }
+      scrollContainer.addEventListener("scroll", hideIndicator);
+      scrollContainer.addEventListener(
+        "pointerdown",
+        () => (isDragging = true)
+      );
+      scrollContainer.addEventListener("pointerup", () => (isDragging = false));
+      scrollContainer.addEventListener("pointermove", detectDrag);
+      function isDragAndDropSupported() {
+        is_chrome = navigator.userAgent.indexOf("Chrome") > -1;
+        return window.innerWidth > 1000 || is_chrome;
+      }
+
+      window.addEventListener("load", checkScrollability);
+      window.addEventListener("resize", checkScrollability);
+
       if (isDragAndDropSupported()) {
         document.getElementById("description").innerText +=
           " Your browser may also support a drag and drop";
@@ -227,6 +302,7 @@
         document.querySelectorAll(".category").forEach((category) => {
           category.classList.add("freeform");
         });
+        // overwrites properties to change style
       }
 
       function handleDrop(e, div) {
@@ -266,10 +342,12 @@
         const div = document.createElement("div");
         div.classList.add("category");
         div.setAttribute("data-category", categoria);
-        div.innerHTML = `<h3>${categoria}</h3><div class='cards-container' id='category-${index}'></div>`;
-        div.addEventListener("dragover", (e) => { e.preventDefault();
-    // make selected card null 
-    selectedCard = null; });
+        div.innerHTML = `<h4>${categoria}</h4><div class='cards-container' id='category-${index}'></div>`;
+        div.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          // make selected card null
+          selectedCard = null;
+        });
         div.addEventListener("drop", (e) =>
           handleDrop(e, div.querySelector(".cards-container"))
         );
@@ -297,7 +375,17 @@
       // }
 
       function renderCards() {
+        // create a title that will be inside card container
+        title = "Cards:";
+        const titleElement = document.createElement("h4");
+
+        // add style so it's width and padding are equal to the cards
+        // put as margin only 5px
+        titleElement.style.margin = "5px";
+        titleElement.style.height = "fit-content";
         initialCardsContainer.innerHTML = "";
+        titleElement.innerText = title;
+        initialCardsContainer.appendChild(titleElement);
         tarjetas.forEach((tarjeta, index) => {
           const card = document.createElement("div");
           card.classList.add("card");
@@ -309,9 +397,11 @@
         });
       }
 
-      initialZone.addEventListener("dragover", (e) => { e.preventDefault();
-    // make selected card null 
-    selectedCard = null; });
+      initialZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        // make selected card null
+        selectedCard = null;
+      });
       initialZone.addEventListener("drop", (e) =>
         handleDrop(e, initialCardsContainer)
       );
@@ -320,31 +410,33 @@
       renderCards();
 
       function generateCompressedCode() {
-    let categories = Array.from(document.querySelectorAll(".category"));
-    
-    // Extract and sort category names
-    let categoryNames = categories.map(category => category.id).sort();
-    
-    // Create dictionary for card assignments using index-based references
-    let cardAssignments = {};
-    
-    categories.forEach(category => {
-        let categoryIndex = categoryNames.indexOf(category.id); // Index from sorted list
-        let cards = Array.from(category.querySelectorAll(".card"));
-        let cardIds = cards.map(card => card.id.replace("card-", ""));
-        
-        if (cardIds.length) {
+        let categories = Array.from(document.querySelectorAll(".category"));
+
+        // Extract and sort category names
+        let categoryNames = categories.map((category) => category.id).sort();
+
+        // Create dictionary for card assignments using index-based references
+        let cardAssignments = {};
+
+        categories.forEach((category) => {
+          let categoryIndex = categoryNames.indexOf(category.id); // Index from sorted list
+          let cards = Array.from(category.querySelectorAll(".card"));
+          let cardIds = cards.map((card) => card.id.replace("card-", ""));
+
+          if (cardIds.length) {
             cardAssignments[categoryIndex] = cardIds;
-        }
-    });
+          }
+        });
 
-    // Encode data as a JSON string and then Base64
-    let dataString = JSON.stringify({ categories: categoryNames, assignments: cardAssignments });
-    let compressedData = btoa(dataString); // Base64 encoding
+        // Encode data as a JSON string and then Base64
+        let dataString = JSON.stringify({
+          categories: categoryNames,
+          assignments: cardAssignments,
+        });
+        let compressedData = btoa(dataString); // Base64 encoding
 
-    return compressedData;
-}
-
+        return compressedData;
+      }
 
       function checkAllCardsSorted() {
         let initialCardsContainer = document.getElementById("cards-container");
