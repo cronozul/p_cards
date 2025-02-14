@@ -150,9 +150,10 @@
     </div>
 
     <h2>Card Sorting Session</h2>
-    <p>
+    <p id="description">
       Add and organize categories and cards as you see fit—there's no right or
       wrong answer.
+      Touch the cards and then the categories to classify them.
     </p>
 
     <div class="initial-zone" id="initial-zone">
@@ -163,6 +164,27 @@
     <div class="container" id="categories-container"></div>
 
     <script>
+      // detect if user can drap and drop use size of screen as proxy
+      function isDragAndDropSupported() {
+        return window.innerWidth > 1000;
+      }
+      // if it is not supported add a message to the user
+      // touch the cards and then the categories to classify them
+      // else ask them to drag and drop
+      //  add this to class description
+      // if (!isDragAndDropSupported()) {
+      //  [0].innerText =
+      //     "Touch the cards and then the categories to classify them.";
+      // }
+      // else {
+      //  [0].innerText =
+      //     "Drag and drop the cards and then the categories to classify them.";
+      // }
+      if (isDragAndDropSupported()) {
+        document.getElementById("description").innerText +=
+          " Your browser may also support a drag and drop";
+      }
+
       let selectedCard = null;
 
       const urlParams = new URLSearchParams(window.location.search);
