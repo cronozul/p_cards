@@ -10,12 +10,94 @@ html, body {
 
 @media (max-width: 760px) {
     .homepage img.decorative-element-icon1,
-    .homepage img.vector-icon,
+    .homepage img.decorative-element-icon6,
     .main-content .subtitle-container {
       display: none;
   }
 }
+
+.homepage {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    /* height: 1080px; 
+    this limits the page to this height, no good */
+    overflow: hidden;
+    text-align: left;
+    font-size: 16px;
+    color: #050505;
+    font-family: 'League Spartan';
+    position: relative; /* This is the reference for all absolute children */
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* Prevents unwanted scrolling */
+}
+
+
+/* Shared styles for all decorative elements */
+.decorative-element {
+    position: absolute; /* Allows positioning within .decorations-container */
+    object-fit: contain;
+    pointer-events: none; /* Prevents interactions */
+    /* z-index: -1; Moves behind content */
+}
+
+/* Individual positioning using percentages */
 .decorative-element-icon {
+    top: 28%;  
+    left: 0%;
+    width: 76.6px;
+    height: 170.5px;
+    display: none;
+}
+
+.decorative-element-icon1 {
+    top: 80%;
+    left: 0%;
+    width: 640px;
+    height: 278.1px;
+}
+
+.decorative-element-icon2 {
+    top: 0%;
+    left: 80%;
+    width: 490.2px;
+    height: 213px;
+}
+
+.decorative-element-icon3 {
+    top: 81%;
+    left: 80%;
+    width: 514.8px;
+    height: 281.6px;
+}
+
+.decorative-element-icon4 {
+    display: none;
+    top: 52%;
+    left: 96%;
+    width: 94.7px;
+    height: 177.8px;
+}
+
+.decorative-element-icon5 {
+    top: 0%;
+    left: 0%;
+    width: 480px;
+    height: 230px;
+}
+
+.decorative-element-icon6 {
+    top: 80%;
+    left: 0%;
+    width: 204.9px;
+    height: 244px;
+}
+
+
+/* 
+.decorative-element-icon {
+    display: none;
     position: absolute;
     top: 304px;
     left: 0px;
@@ -23,6 +105,7 @@ html, body {
     height: 170.5px;
 }
 .decorative-element-icon1 {
+    display: none;
     position: absolute;
     top: 802px;
     left: 0px;
@@ -30,6 +113,7 @@ html, body {
     height: 278.1px;
 }
 .decorative-element-icon2 {
+    display: none;
     position: absolute;
     top: 0px;
     left: 1430px;
@@ -37,6 +121,7 @@ html, body {
     height: 213px;
 }
 .decorative-element-icon3 {
+    display: none;
     position: absolute;
     top: 879.06px;
     left: 1462px;
@@ -45,6 +130,7 @@ html, body {
     object-fit: contain;
 }
 .decorative-element-icon4 {
+    display: none;
     position: absolute;
     top: 560px;
     left: 1840.91px;
@@ -52,6 +138,23 @@ html, body {
     height: 177.8px;
     object-fit: contain;
 }
+
+.decorative-element-icon6  {
+    display:none;
+    position: absolute;
+    top: 802px;
+    left: 0px;
+    width: 204.9px;
+    height: 244px;
+}
+.decorative-element-icon5 {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 480px;
+    height: 230px;
+} */
 .soluciones1 {
     position: relative;
     line-height: 18px;
@@ -64,21 +167,6 @@ html, body {
     justify-content: center;
     padding: 8px;
     gap: 8px;
-}
-
-.vector-icon {
-    position: absolute;
-    top: 802px;
-    left: 0px;
-    width: 204.9px;
-    height: 244px;
-}
-.decorative-element-icon5 {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 480px;
-    height: 230px;
 }
 .title {
     /* flex: 1; */
@@ -120,7 +208,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 40px;
+    gap: 1em;
     text-align: center;
     font-size: 90px;
     font-family: 'DM Serif Text';
@@ -171,17 +259,6 @@ html, body {
     cursor: pointer;
     font-size: 18px;
     color: #050505;
-}
-.homepage {
-    width: 100%;
-    position: relative;
-    background-color: #fff;
-    height: 1080px;
-    overflow: hidden;
-    text-align: left;
-    font-size: 16px;
-    color: #050505;
-    font-family: 'League Spartan';
 }
 
 .buttons {
