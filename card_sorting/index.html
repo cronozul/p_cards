@@ -222,7 +222,7 @@
       if (freeform) {
         addCategoryButton.style.display = "block";
         addCategoryButton.addEventListener("click", addCategory);
-        categorias = Array(9).fill("__________");
+        categorias = Array(9).fill("_ _ _ _ _ _");
 
         document.querySelectorAll(".category").forEach((category) => {
           category.classList.add("freeform");
@@ -284,8 +284,8 @@
 
       function addCategory() {
         if (freeform) {
-          categorias.push("__________");
-          createCategoryElement("__________", categorias.length - 1);
+          categorias.push("_ _ _ _ _ _");
+          createCategoryElement("_ _ _ _ _ _", categorias.length - 1);
         }
       }
       // function addNamedCategory(categoryName) {
