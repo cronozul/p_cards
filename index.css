@@ -34,7 +34,7 @@ html, body {
 }
 
 
-/* Shared styles for all decorative elements */
+/* Shared styles for all decorative_elements */
 .decorative-element {
     position: absolute; /* Allows positioning within .decorations-container */
     object-fit: contain;
