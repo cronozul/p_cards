@@ -1,9 +1,9 @@
-# UX Vault
-
-<picture>
-  <source srcset="img/ux-vault-logo-white.svg" media="(prefers-color-scheme: dark)">
-  <img src="img/ux-vault-logo.svg" alt="UX Vault Logo" width="100">
-</picture>
+<div align="center">
+  <picture>
+    <source srcset="img/ux-vault-logo-white.svg" media="(prefers-color-scheme: dark)">
+    <img src="img/ux-vault-logo.svg" alt="UX Vault" width="500" onerror="this.replaceWith(document.createTextNode('UX Vault'))">
+  </picture>
+</div>
 
 ## Project Overview
 UX Vault is an open-source platform designed to streamline the process of conducting card sorting surveys. It allows users to create surveys, share them via links, and analyze results stored locally in their browser through correlation matrices, dendrograms, and more advanced analytics in future updates.
