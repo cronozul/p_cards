@@ -1,3 +1,102 @@
+/* General Styles */
+body {
+    font-family: 'League Spartan', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #050505;
+}
+
+Header
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Go Back Button */
+.go-back {
+    background: #050505;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.go-back:hover {
+    background: #333;
+}
+
+/* Navigation Menu */
+.menu {
+    display: flex;
+    gap: 15px;
+}
+
+.menu-item {
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Main Content */
+.content {
+    text-align: center;
+    padding: 20px;
+}
+
+.solutions-title {
+    font-size: 32px;
+    font-family: 'DM Serif Text', serif;
+}
+
+.description {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Logo */
+.logo-container {
+    margin-top: 20px;
+}
+
+.logo {
+    width: 80px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .solutions-title {
+        font-size: 28px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
+    .go-back {
+        width: 100%;
+    }
+}
+
+
 .solutions1 {
     position: relative;
     line-height: 66px;
