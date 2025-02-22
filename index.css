@@ -11,7 +11,8 @@ html, body {
 @media (max-width: 760px) {
     .homepage img.decorative-element-icon1,
     .homepage img.decorative-element-icon6,
-    .main-content .subtitle-container {
+    .main-content .subtitle-container,
+    .homepage img.decorative-element-icon5{
       display: none;
   }
 }
@@ -251,7 +252,7 @@ html, body {
     /* position: absolute; */
     top: 774px;
     left: 758px;
-    border-radius: 24px;
+    border-radius: 16px;
     background-color: #050505;
     width: 220px;
     height: 56px;
@@ -262,8 +263,9 @@ html, body {
     padding: 8px;
     box-sizing: border-box;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     color: #fff;
+    font-family: 'League Spartan';
 }
 .default1 {
     position: relative;
@@ -286,6 +288,7 @@ html, body {
     cursor: pointer;
     font-size: 18px;
     color: #050505;
+    font-family: 'League Spartan';
 }
 
 .buttons {
