@@ -16,12 +16,6 @@ UX Vault is an open-source platform designed to streamline the process of conduc
 - Generate correlation matrices and dendrograms
 - Additional analytics features coming soon
 
-## How to Use
-1. **Create a survey:** Define categories and cards according to your research needs.
-2. **Share the survey:** Generate a unique link and distribute it to participants.
-3. **Collect responses:** When you click on the shared link, responses are automatically saved in your local storage.
-4. **Analyze results:** Access and analyze the saved data using the platform's interface.
-
 ## Contributing
 We welcome contributions from the community! To contribute:
 1. Fork the repository.
