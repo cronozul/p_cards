@@ -1,0 +1,13 @@
+// create translations for title subtitle and button
+// spanish TODO
+spanish: {
+  title: "Clasificación de tarjetas",
+  subtitle: "Arrastra y suelta las tarjetas para clasificarlas.",
+  button1: "Compartir"
+}
+english: {
+  title: "Card Sorting",
+  subtitle: "Drag and drop the cards to sort them.",
+  button: "Start"
+}
+

@@ -249,8 +249,12 @@
     </div>
     <div class="top-buttons"> 
       <!-- TODO REMOVE THIS POPUP AFTER SECOND TIME CLICKING -->
-      <button class="button"  data-tally-open="mV4RY6" data-tally-width="400" data-tally-emoji-text="👋" data-tally-emoji-animation="wave" data-tally-auto-close="5000" id="copy-button">Share</button>
-      <button class="button"  data-tally-open="mV4RY6" data-tally-width="400" data-tally-emoji-text="👋" data-tally-emoji-animation="wave" data-tally-auto-close="5000" id="whatsapp-button">WhatsApp</button>
+      <button class="button"  data-tally-open="mV4RY6" data-tally-width="400" data-tally-emoji-text="👋" data-tally-emoji-animation="wave" data-tally-auto-close="5000" id="copy-button">
+        Share
+      </button>
+      <button class="button"  data-tally-open="mV4RY6" data-tally-width="400" data-tally-emoji-text="👋" data-tally-emoji-animation="wave" data-tally-auto-close="5000" id="whatsapp-button">
+        WhatsApp
+      </button>
       <button class="button" id="add-category-button" style="display: none">
         Add category
       </button>
@@ -515,8 +519,8 @@ ${categoria === "" ? '' : 'readonly'}>
 
     let compressedCode = generateCompressedCode();
     let shareLink = `${
-  window.location.protocol + "//" + window.location.hostname + window.location.pathname
-}?data=${encodeURIComponent(compressedCode)}`;
+  window.location.protocol + "//" + window.location.hostname
+}/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
 
     let whatsappMessage = `Here is my response to this card sorting: ${shareLink}`;
 

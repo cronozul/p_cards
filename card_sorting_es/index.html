@@ -518,8 +518,8 @@ ${categoria === "" ? '' : 'readonly'}>
 
     let compressedCode = generateCompressedCode();
     let shareLink = `${
-  window.location.protocol + "//" + window.location.hostname + window.location.pathname
-}?data=${encodeURIComponent(compressedCode)}`;
+  window.location.protocol + "//" + window.location.hostname
+}/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
 
     let whatsappMessage = `Esta son las respuestas del card sorting: ${shareLink}`;
 
