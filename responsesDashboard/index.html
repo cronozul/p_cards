@@ -85,6 +85,34 @@
     <button class="floating-btn" onclick="verResultados()">Get results</button>
 
     <script>
+        function decodeResponseFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedData = urlParams.get("data"); // Extract encoded data
+
+    if (!encodedData) {
+        console.warn("No encoded data found in URL.");
+        return null;
+    }
+
+    try {
+        const decodedString = atob(encodedData); // Decode Base64
+        const responseData = JSON.parse(decodedString); // Parse JSON
+        console.log("Decoded Response:", responseData);
+        return responseData;
+    } catch (error) {
+        console.error("Error decoding response:", error);
+        return null;
+    }
+}
+
+// Usage
+const decodedResponse = decodeResponseFromURL();
+if (decodedResponse) {
+    // Process the decoded response, e.g., render categories and assignments
+    console.log(decodedResponse.assignments);
+}
+
+
         const container = document.getElementById("id-container");
 
         function getStoredIDs() {
@@ -132,22 +160,22 @@
             alert("Mostrando resultados...");
         }
 
-        function checkForNewID() {
-            const urlParams = new URLSearchParams(window.location.search);
-            for (let param of urlParams.keys()) {
-                if (param.startsWith("ID")) {
-                    saveID(param);
-                }
-            }
-        }
+        // function checkForNewID() {
+        //     const urlParams = new URLSearchParams(window.location.search);
+        //     for (let param of urlParams.keys()) {
+        //         if (param.startsWith("ID")) {
+        //             saveID(param);
+        //         }
+        //     }
+        // }
 
-        function renderStoredIDs() {
-            const storedIDs = getStoredIDs();
-            storedIDs.forEach(id => addCard(id));
-        }
+        // function renderStoredIDs() {
+        //     const storedIDs = getStoredIDs();
+        //     storedIDs.forEach(id => addCard(id));
+        // }
 
-        checkForNewID();
-        renderStoredIDs();
+        // checkForNewID();
+        // renderStoredIDs();
     </script>
 </body>
 </html>
