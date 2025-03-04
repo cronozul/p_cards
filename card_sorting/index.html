@@ -41,6 +41,26 @@
         background: #ffffff;
         position: relative;
       }
+      input {
+        font-family: "League Spartan", sans-serif;
+        font-size: 1em;
+        /* allow wrapping */
+        word-wrap: break-word;
+        text-align: center;
+        color: black;
+        border: none;
+        background: transparent;
+        outline: none;
+        width: 100%;
+        margin-bottom: 8px;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        /* text-transform: uppercase; */
+        font-weight: bold;
+        /* put default text */
+        
+      }
 
       .top-buttons {
         margin-top: 5px;
@@ -133,6 +153,10 @@
         ); /* Slightly transparent background */
         box-shadow: 0px 4px 4px 0px rgba(101, 101, 101, 0.144); /* Softer shadow */
         color: rgba(101, 101, 101, 0.3);
+        /* make it an input form */
+        
+
+
       }
 
       /* correct wrapping */
@@ -295,17 +319,22 @@
       const initialCardsContainer = document.getElementById("cards-container");
       const initialZone = document.getElementById("initial-zone");
       const addCategoryButton = document.getElementById("add-category-button");
+      let freecatTitle = '_ _ _ _ _ _';
 
-      if (freeform) {
-        addCategoryButton.style.display = "block";
-        addCategoryButton.addEventListener("click", addCategory);
-        categorias = Array(9).fill("_ _ _ _ _ _");
-
-        document.querySelectorAll(".category").forEach((category) => {
-          category.classList.add("freeform");
-        });
         // overwrites properties to change style
-      }
+        if (freeform) {
+          addCategoryButton.style.display = "block";
+          addCategoryButton.addEventListener("click", addCategory);
+          // categorias += Array(9).fill(freecatTitle);
+          // complete 9 categories with placeholder
+          categorias = categorias.concat(Array(9 - categorias.length).fill(""));
+          
+          document.querySelectorAll(".category").forEach((category) => {
+            //  check if title is freecatTitle
+            if (category.getAttribute("data-category") === freecatTitle) {
+            category.classList.add("freeform");
+            }});
+        }
 
       function handleDrop(e, div) {
         e.preventDefault();
@@ -335,8 +364,10 @@
         // Apply styles if freeform mode is enabled
         if (freeform) {
           document.querySelectorAll(".category").forEach((category) => {
+            //  check if title is freecatTitle
+            if (category.getAttribute("data-category") === freecatTitle) {
             category.classList.add("freeform");
-          });
+            }});
         }
       }
 
@@ -344,8 +375,8 @@
 
       function addCategory() {
         if (freeform) {
-          categorias.push("_ _ _ _ _ _");
-          createCategoryElement("_ _ _ _ _ _", categorias.length - 1);
+          categorias.push(freecatTitle);
+          createCategoryElement("", categorias.length - 1);
         }
       }
 
@@ -377,14 +408,20 @@
 function createCategoryElement(categoria, index) {
   const div = document.createElement("div");
   div.classList.add("category");
-  div.setAttribute("data-category", categoria);
-  div.innerHTML = `<h4 style=width:100%>${categoria}</h4><div class='cards-container' id='category-${index}'></div>`;
 
+
+  // div.appendChild(input);
+  // div.innerHTML = `<h4 style=width:100%>${categoria}</h4><div class='cards-container' id='category-${index}'></div>`;
+  // create an innerHtml input
+  console.log(categoria);
+div.innerHTML = `<input type="text" placeholder="${freecatTitle}" value="${categoria ? categoria : ''}" 
+${categoria === "" ? '' : 'readonly'}>
+<div class='cards-container' id='category-${index}'></div>`;
   div.addEventListener("dragover", (e) => e.preventDefault());
   div.addEventListener("drop", (e) => handleDrop(e, div.querySelector(".cards-container")));
 
   // Apply freeform styles if needed
-  if (freeform) div.classList.add("freeform");
+  if (freeform && categoria === freecatTitle) div.classList.add("freeform");
 
 
   container.appendChild(div);
@@ -411,8 +448,12 @@ function createCategoryElement(categoria, index) {
         // Create dictionary for card assignments using index-based references
         let cardAssignments = {};
 
-        categories.forEach((category) => {
-          let categoryIndex = categoryNames.indexOf(category.id); // Index from sorted list
+        categories.forEach((category,index) => {
+          // let categoryIndex = categoryNames.indexOf(category.id); // Index from sorted list
+          // create categoryIndex simply as the name the content of its input box
+          let categoryIndex = category.querySelector("input").value;
+          // add index to allow duplicate names
+          categoryIndex = categoryIndex + '_' + index;
           let cards = Array.from(category.querySelectorAll(".card"));
           let cardIds = cards.map((card) => card.id.replace("card-", ""));
 
@@ -423,10 +464,11 @@ function createCategoryElement(categoria, index) {
 
         // Encode data as a JSON string and then Base64
         let dataString = JSON.stringify({
-          categories: categoryNames,
+          // categories: categoryNames,
           assignments: cardAssignments,
         });
         let compressedData = btoa(dataString); // Base64 encoding
+        console.log(compressedData);
 
         return compressedData;
       }
