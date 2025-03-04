@@ -511,8 +511,8 @@ ${categoria === "" ? '' : 'readonly'}>
 
     let compressedCode = generateCompressedCode();
     let shareLink = `${
-      window.location.origin
-    }/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
+  window.location.protocol + "//" + window.location.hostname + window.location.pathname
+}?data=${encodeURIComponent(compressedCode)}`;
 
     let whatsappMessage = `Here is my response to this card sorting: ${shareLink}`;
 

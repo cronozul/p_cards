@@ -80,6 +80,8 @@
         <img src="img/ux-vault-logo.svg" alt="UX Vault Logo" class="ux-vault-logo">
     </div>
     <h2>Card sorting responses</h2>
+
+    Make sure to share this link with the survey collector
     
     <div id="id-container"></div>
     <button class="floating-btn" onclick="verResultados()">Get results</button>
@@ -159,6 +161,35 @@ if (decodedResponse) {
         function verResultados() {
             alert("Mostrando resultados...");
         }
+
+        function decodeURLData(encodedString) {
+    if (!encodedString) {
+        console.warn("No data provided.");
+        return null;
+    }
+
+    try {
+        let decodedData = decodeURIComponent(encodedString); // Decode URL encoding
+        
+        while (decodedData.length % 4 !== 0) {
+            decodedData += "="; // Fix missing Base64 padding if needed
+        }
+
+        const decodedString = atob(decodedData); // Base64 decoding
+        const responseData = JSON.parse(decodedString); // Parse JSON
+
+        console.log("Decoded Data:", responseData);
+        return responseData;
+    } catch (error) {
+        console.error("Error decoding the provided data:", error);
+        return null;
+    }
+}
+
+// Example usage:
+let testString = "eyJhc3NpZ25tZW50cyI6eyJNdXkgaW1wb3J0YW50ZV8wIjpbIjEiXSwiSW1wb3J0YW50ZV8xIjpbIjYiLCIyIiwiNSJdLCJQb2NvIGltcG9ydGFudGVfMiI6WyI0IiwiMyJdLCJfNCI6WyIwIl19fQ%3D%3D";
+decodeURLData(testString);
+
 
         // function checkForNewID() {
         //     const urlParams = new URLSearchParams(window.location.search);
