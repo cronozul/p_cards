@@ -6,7 +6,6 @@
     <title>Card Sorting</title>
     <script async src="https://tally.so/widgets/embed.js"></script>
 
-
     <!-- <link rel="stylesheet" href="./index.css" /> -->
     <link
       rel="stylesheet"
@@ -44,9 +43,27 @@
         background: #ffffff;
         position: relative;
       }
+      /* media query for body */
+      @media (max-width: 480px) {
+                body {
+          /* width: 60vw;
+          height: 60vh; */
+          margin: 0.3rem;
+          padding: 0;
+          /* overflow: hidden; Optional: Prevents scrolling */
+        }
+        /* make categorys min height much smaller */
+
+      }
+      /* make a media for size of input text */
+      @media (max-width: 480px) {
+        input {
+          font-size: 0.6rem !important;
+        }
+      }
       input {
         font-family: "League Spartan", sans-serif;
-        font-size: 1em;
+        font-size: 1rem;
         /* allow wrapping */
         word-wrap: break-word;
         text-align: center;
@@ -62,7 +79,6 @@
         /* text-transform: uppercase; */
         font-weight: bold;
         /* put default text */
-        
       }
 
       .top-buttons {
@@ -94,14 +110,14 @@
         align-content: center;
         justify-content: flex-start;
         flex-wrap: wrap;
-        min-height: 60px;
-        min-width: 100px;
+        /* min-height: 60px; */
+        min-width: 10px;
         /* background: #ffecec; */
         padding: 10px 20px;
         /* border-radius: 8px; */
         /* border: 2px dashed #656565; */
         /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-        box-sizing: border-box;
+        /* box-sizing: border-box; */
         position: relative;
 
         border-radius: 16px;
@@ -129,9 +145,52 @@
         padding-bottom: 10px;
       }
 
+
+      /* when screen size is very small ensure min-width is 35vw when is larger just put a max  */
+      @media screen and (max-width: 480px) {
+        .category {
+          width: 30vw !important;
+          
+          
+        }
+      }
+      /* eliminate padding for container when screen is small */
+      @media screen and (max-width: 480px) {
+        .container {
+          padding: 0;
+          width: 100vw !important;
+        }
+      }
+      @media  screen and (min-width: 480px) {
+        .category {
+          width: 220px !important;
+        }
+        
+      }
+      /* change h4 h3 h2 h1 too smaller if screen is small */
+      @media screen and (max-width: 480px) {
+
+        h4 {
+          font-size: 0.6rem;
+        }
+        h3 {
+          font-size: 0.8rem;
+        }
+        h2 {
+          font-size: 1rem;
+        }
+        h1 {
+          font-size: 1.2rem;
+        }
+        p {
+          font-size: 0.7rem;
+        }
+      }
       .category {
-        width: 220px;
-        min-height: 200px;
+        /* max-width: 240px !important; */
+        /* make min-height important */
+        /* TODO find why this is overwritten */
+        min-height: 15vh !important;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -139,11 +198,11 @@
         /* gap: 1px; */
         align-content: flex-start;
         justify-content: center;
-
-
-
-
-
+      }
+      .category-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
       }
 
       .category.freeform {
@@ -157,9 +216,6 @@
         box-shadow: 0px 4px 4px 0px rgba(101, 101, 101, 0.144); /* Softer shadow */
         color: rgba(101, 101, 101, 0.3);
         /* make it an input form */
-        
-
-
       }
 
       /* correct wrapping */
@@ -223,22 +279,23 @@
       .dragging {
         opacity: 0.5;
       }
-      .page {
+      /* .page {
         max-width: 100vw;
         max-height: 100vh;
-      }
+      } */
     </style>
   </head>
   <body>
     <div page>
+      <div class="scroll-indicator">
+        Desliza ➡️ para ver todas las categorías
+      </div>
 
-      <div class="scroll-indicator">Desliza ➡️ para ver todas las categorías</div>
-
-      <h2 style="
-    margin-top: 0px;
-">Sesión de card sorting</h2>
+      <h2 style="margin-top: 0px">Razones para ser vegano</h2>
       <p id="description">
-        Añade y organiza categorías y tarjetas libremente; ¡no hay una forma correcta o incorrecta! Toca una tarjeta y luego toca la parte superior de una caja de categoría para clasificarla.      </p>
+        Toca una tarjeta y luego toca la parte superior
+        de una caja de categoría para clasificarla.
+      </p>
 
       <div class="initial-zone" id="initial-zone">
         <div class="cards-container" id="cards-container"></div>
@@ -248,10 +305,26 @@
     </div>
     <div class="top-buttons">
       <!-- TODO REMOVE THIS POPUP AFTER SECOND TIME CLICKING -->
-      <button class="button"  data-tally-open="mV4RY6" data-tally-width="400" data-tally-emoji-text="👋" data-tally-emoji-animation="wave" data-tally-auto-close="5000" id="copy-button">
+      <button
+        class="button"
+        data-tally-open="mV4RY6"
+        data-tally-width="400"
+        data-tally-emoji-text="👋"
+        data-tally-emoji-animation="wave"
+        data-tally-auto-close="5000"
+        id="copy-button"
+      >
         Compartir
       </button>
-      <button class="button"  data-tally-open="mV4RY6" data-tally-width="400" data-tally-emoji-text="👋" data-tally-emoji-animation="wave" data-tally-auto-close="5000" id="whatsapp-button">
+      <button
+        class="button"
+        data-tally-open="mV4RY6"
+        data-tally-width="400"
+        data-tally-emoji-text="👋"
+        data-tally-emoji-animation="wave"
+        data-tally-auto-close="5000"
+        id="whatsapp-button"
+      >
         WhatsApp
       </button>
       <button class="button" id="add-category-button" style="display: none">
@@ -267,7 +340,6 @@
       function hideIndicator() {
         indicator.style.opacity = "0";
         setTimeout(() => (indicator.style.display = "none"), 500);
-
       }
 
       function detectDrag(event) {
@@ -315,10 +387,12 @@
       if (!urlParams.has("categorias") && !urlParams.has("tarjetas")) {
         alert("⚠️ No URL parameters found. Using default test setup.");
         categorias = ["Category 1", "Category 2"];
-        sufix = "Card "
-        tarjetas = Array(7).fill().map((_, i) => `${sufix}${i + 1}`);
+        sufix = "Card ";
+        tarjetas = Array(7)
+          .fill()
+          .map((_, i) => `${sufix}${i + 1}`);
         // freeform = true;
-        // ranomly pick freeform or not
+        // randomly pick freeform or not
         freeform = Math.random() > 0.5;
       }
 
@@ -326,21 +400,22 @@
       const initialCardsContainer = document.getElementById("cards-container");
       const initialZone = document.getElementById("initial-zone");
       const addCategoryButton = document.getElementById("add-category-button");
-      let freecatTitle = '_ _ _ _ _ _';
+      let freecatTitle = "_ _ _ _ _ _";
 
-        // overwrites properties to change style
+      // overwrites properties to change style
       if (freeform) {
         addCategoryButton.style.display = "block";
         addCategoryButton.addEventListener("click", addCategory);
-          // categorias += Array(9).fill(freecatTitle);
-          // complete 9 categories with placeholder
-          categorias = categorias.concat(Array(9 - categorias.length).fill(""));
+        // categorias += Array(9).fill(freecatTitle);
+        // complete 9 categories with placeholder
+        categorias = categorias.concat(Array(9 - categorias.length).fill(""));
 
         document.querySelectorAll(".category").forEach((category) => {
-            //  check if title is freecatTitle
-            if (category.getAttribute("data-category") === freecatTitle) {
-          category.classList.add("freeform");
-            }});
+          //  check if title is freecatTitle
+          if (category.getAttribute("data-category") === freecatTitle) {
+            category.classList.add("freeform");
+          }
+        });
       }
 
       function handleDrop(e, div) {
@@ -362,77 +437,114 @@
         });
       }
 
+      // function renderCategories() {
+      //   container.innerHTML = "";
+      //   categorias.forEach((categoria, index) => {
+      //     createCategoryElement(categoria, index);
+      //   });
+
+      //   // Apply styles if freeform mode is enabled
+      //   if (freeform) {
+      //     document.querySelectorAll(".category").forEach((category) => {
+      //       //  check if title is freecatTitle
+      //       if (category.getAttribute("data-category") === freecatTitle) {
+      //       category.classList.add("freeform");
+      //       }});
+      //   }
+      // }
+
       function renderCategories() {
+        console.log(categorias);
         container.innerHTML = "";
-        categorias.forEach((categoria, index) => {
-          createCategoryElement(categoria, index);
-        });
+
+        for (let i = 0; i < categorias.length; i += 2) {
+          const categoryGroup = document.createElement("div");
+          categoryGroup.classList.add("category-group");
+          console.log(categorias);
+
+          createCategoryElement(categorias[i], i, categoryGroup);
+
+          if (i + 1 < categorias.length) {
+            createCategoryElement(categorias[i + 1], i + 1, categoryGroup);
+          }
+
+          container.appendChild(categoryGroup);
+        }
 
         // Apply styles if freeform mode is enabled
         if (freeform) {
           document.querySelectorAll(".category").forEach((category) => {
-            //  check if title is freecatTitle
             if (category.getAttribute("data-category") === freecatTitle) {
-            category.classList.add("freeform");
-            }});
+              category.classList.add("freeform");
+            }
+          });
         }
       }
-
-
 
       function addCategory() {
         if (freeform) {
           categorias.push(freecatTitle);
-          createCategoryElement("", categorias.length - 1);
+
+          // Buscar el último grupo de categorías dentro del contenedor
+          let categoryGroups = document.querySelectorAll(".category-group");
+          let lastGroup = categoryGroups[categoryGroups.length - 1];
+
+          // Si el último grupo tiene menos de 2 categorías, agregar ahí.
+          if (lastGroup && lastGroup.children.length < 2) {
+            createCategoryElement("", categorias.length - 1, lastGroup);
+          } else {
+            // Si ya hay dos categorías en el último grupo, crear uno nuevo
+            const newGroup = document.createElement("div");
+            newGroup.classList.add("category-group");
+            createCategoryElement("", categorias.length - 1, newGroup);
+            container.appendChild(newGroup);
+          }
         }
       }
-
       function renderCards() {
-  title = "Tarjetas:";
-  const titleElement = document.createElement("h4");
-  titleElement.style.margin = "5px";
-  titleElement.style.height = "fit-content";
-  initialCardsContainer.innerHTML = "";
-  titleElement.innerText = title;
-  initialCardsContainer.appendChild(titleElement);
+        title = "Tarjetas:";
+        const titleElement = document.createElement("h4");
+        titleElement.style.margin = "5px";
+        titleElement.style.height = "fit-content";
+        initialCardsContainer.innerHTML = "";
+        titleElement.innerText = title;
+        initialCardsContainer.appendChild(titleElement);
 
-  tarjetas.forEach((tarjeta, index) => {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.setAttribute("draggable", "true");
-    card.setAttribute("id", `card-${index}`);
-    card.innerText = tarjeta;
+        tarjetas.forEach((tarjeta, index) => {
+          const card = document.createElement("div");
+          card.classList.add("card");
+          card.setAttribute("draggable", "true");
+          card.setAttribute("id", `card-${index}`);
+          card.innerText = tarjeta;
 
-    addDragAndDropListeners(card);
+          addDragAndDropListeners(card);
 
+          initialCardsContainer.appendChild(card);
+        });
+      }
 
+      function createCategoryElement(categoria, index, parentContainer) {
+        const div = document.createElement("div");
+        div.classList.add("category");
 
-    initialCardsContainer.appendChild(card);
-  });
-}
+        div.innerHTML = `<input type="text" placeholder="${freecatTitle}" value="${
+          categoria ? categoria : ""
+        }" 
+    ${categoria === "" ? "" : "readonly"}>
+    <div class='cards-container' id='category-${index}'></div>`;
 
+        div.addEventListener("dragover", (e) => e.preventDefault());
+        div.addEventListener("drop", (e) =>
+          handleDrop(e, div.querySelector(".cards-container"))
+        );
 
-function createCategoryElement(categoria, index) {
-  const div = document.createElement("div");
-  div.classList.add("category");
+        // Apply freeform styles if needed
+        if (freeform && categoria === freecatTitle) {
+          div.classList.add("freeform");
+        }
 
-
-  // div.appendChild(input);
-  // div.innerHTML = `<h4 style=width:100%>${categoria}</h4><div class='cards-container' id='category-${index}'></div>`;
-  // create an innerHtml input
-  console.log(categoria);
-div.innerHTML = `<input type="text" placeholder="${freecatTitle}" value="${categoria ? categoria : ''}" 
-${categoria === "" ? '' : 'readonly'}>
-<div class='cards-container' id='category-${index}'></div>`;
-  div.addEventListener("dragover", (e) => e.preventDefault());
-  div.addEventListener("drop", (e) => handleDrop(e, div.querySelector(".cards-container")));
-
-  // Apply freeform styles if needed
-  if (freeform && categoria === freecatTitle) div.classList.add("freeform");
-
-
-  container.appendChild(div);
-}
+        parentContainer.appendChild(div);
+      }
 
       initialZone.addEventListener("dragover", (e) => {
         e.preventDefault();
@@ -443,7 +555,7 @@ ${categoria === "" ? '' : 'readonly'}>
         handleDrop(e, initialCardsContainer)
       );
 
-      renderCategories();
+      renderCategories(categorias, freeform, freecatTitle);
       renderCards();
 
       function generateCompressedCode() {
@@ -455,12 +567,12 @@ ${categoria === "" ? '' : 'readonly'}>
         // Create dictionary for card assignments using index-based references
         let cardAssignments = {};
 
-        categories.forEach((category,index) => {
+        categories.forEach((category, index) => {
           // let categoryIndex = categoryNames.indexOf(category.id); // Index from sorted list
           // create categoryIndex simply as the name the content of its input box
           let categoryIndex = category.querySelector("input").value;
           // add index to allow duplicate names
-          categoryIndex = categoryIndex + '_' + index;
+          categoryIndex = categoryIndex + "_" + index;
           let cards = Array.from(category.querySelectorAll(".card"));
           let cardIds = cards.map((card) => card.id.replace("card-", ""));
 
@@ -482,14 +594,16 @@ ${categoria === "" ? '' : 'readonly'}>
 
       function checkAllCardsSorted() {
         let initialCardsContainer = document.getElementById("cards-container");
-        return initialCardsContainer.children.length === 1
+        return initialCardsContainer.children.length === 1;
       }
 
       document
         .getElementById("copy-button")
         .addEventListener("click", function () {
           if (!checkAllCardsSorted()) {
-            alert("⚠️ Por favor, categoriza todas las cartas antes de copiar el link!");
+            alert(
+              "⚠️ Por favor, categoriza todas las cartas antes de copiar el link!"
+            );
             return;
           }
 
@@ -505,60 +619,60 @@ ${categoria === "" ? '' : 'readonly'}>
             })
             .catch((err) => {
               console.error("Failed to copy:", err);
-              alert("❌ Hubo un error al copiar el link. Por favor, inténtalo de nuevo.");
+              alert(
+                "❌ Hubo un error al copiar el link. Por favor, inténtalo de nuevo."
+              );
             });
         });
-        document
-  .getElementById("whatsapp-button")
-  .addEventListener("click", function () {
-    if (!checkAllCardsSorted()) {
-      alert("⚠️ Por favor, categoriza todas las cartas antes de compartir!");
-      return;
-    }
+      document
+        .getElementById("whatsapp-button")
+        .addEventListener("click", function () {
+          if (!checkAllCardsSorted()) {
+            alert(
+              "⚠️ Por favor, categoriza todas las cartas antes de compartir!"
+            );
+            return;
+          }
 
-    let compressedCode = generateCompressedCode();
-    let shareLink = `${
-  window.location.protocol + "//" + window.location.hostname
-}/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
+          let compressedCode = generateCompressedCode();
+          let shareLink = `${
+            window.location.protocol + "//" + window.location.hostname
+          }/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
 
-    let whatsappMessage = `Esta son las respuestas del card sorting: ${shareLink}`;
+          let whatsappMessage = `Esta son las respuestas del card sorting: ${shareLink}`;
 
-    let whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-      whatsappMessage
-    )}`;
+          let whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+            whatsappMessage
+          )}`;
 
-    window.open(whatsappURL, "_blank");
-  });
+          window.open(whatsappURL, "_blank");
+        });
       const cards = document.querySelectorAll(".card"); // Replace '.card' with your card selector
 
-
       document.addEventListener("click", (e) => {
-  const card = e.target.closest(".card"); // Ensure we always get the `.card` element
-  let category = e.target.closest(".category"); // Ensure we get the `.category` element
-  // check also the initial zone
-  category = category || e.target.closest(".initial-zone");
+        const card = e.target.closest(".card"); // Ensure we always get the `.card` element
+        let category = e.target.closest(".category"); // Ensure we get the `.category` element
+        // check also the initial zone
+        category = category || e.target.closest(".initial-zone");
 
-  if (card) {
-    e.preventDefault();
-    if (selectedCard) {
-      selectedCard.classList.remove("selected");
-    }
-    selectedCard = card;
-    selectedCard.classList.add("selected");
-  }
+        if (card) {
+          e.preventDefault();
+          if (selectedCard) {
+            selectedCard.classList.remove("selected");
+          }
+          selectedCard = card;
+          selectedCard.classList.add("selected");
+        } else if (category) {
+          e.preventDefault();
+          const child = category.querySelector(".cards-container");
 
-  else if (category) {
-    e.preventDefault();
-    const child = category.querySelector(".cards-container");
-
-    if (selectedCard && child) {
-      child.appendChild(selectedCard);
-      selectedCard.classList.remove("selected");
-      selectedCard = null;
-    }
-  }
-});
-
+          if (selectedCard && child) {
+            child.appendChild(selectedCard);
+            selectedCard.classList.remove("selected");
+            selectedCard = null;
+          }
+        }
+      });
     </script>
   </body>
 </html>
