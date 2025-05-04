@@ -39,7 +39,7 @@ window.addEventListener("resize", checkScrollability);
 
 if (isDragAndDropSupported()) {
   document.getElementById("description").innerText +=
-    " Tu navegador también puede admitir la función de arrastrar y soltar.";
+    " Your browser may also support drag and drop. Try it out!";
 }
 
 let selectedCard = null;
@@ -266,20 +266,20 @@ function checkAllCardsSorted() {
 }
 
 function finalizarEncuesta(respuestas) {
-const quiereCopiar = confirm("📋 Para completar la encuesta, debes enviar tus respuestas manualmente al encuestador.\n\n" +
-                             "¿Quieres copiarlas ahora para pegarlas fácilmente en tu app de mensajería?");
+const quiereCopiar = confirm("📋 To complete the survey, you need to send the response manually to the surveyor.\n\n" +
+                            "Do you want to copy them now to paste them easily in your messaging app?");
 
 if (quiereCopiar) {
     navigator.clipboard.writeText(respuestas).then(() => {
-        alert("✅ Tus respuestas han sido copiadas. Ahora pégalas y envíalas al encuestador.\n\n" +
-              "📲 También puedes usar el botón de WhatsApp para enviarlas más rápido.");
+        alert("✅ Your answers have been copied. Now paste them and send them to the surveyor.\n\n" +
+              "📲 You can also use the WhatsApp button to send them faster. ");
     }).catch(err => {
-        alert("❌ Error al copiar las respuestas: puede que necesites aceptar el permiso al portapapeles en tu navegador.\n\n" +
-              "🔗 También puedes usar el botón de Whatsapp o copiarlas manualmente de aquí:\n" + respuestas);
+        alert("❌ Error copying the answers: you may need to accept the clipboard permission in your browser.\n\n" +
+              "🔗 You can also use the WhatsApp button or copy them manually from here:\n" + respuestas);
     });
 } else {
-    alert("⚠️ Recuerda que debes enviar las respuestas manualmente. Si necesitas copiarlas, vuelve a presionar el botón.\n\n" +
-          "📲 También puedes usar el botón de WhatsApp para enviarlas más rápido.");
+    alert("⚠️ Remember that you need to send the answers manually. If you need to copy them, press the button again.\n\n" +
+          "📲 You can also use the WhatsApp button to send them faster.");
 }
 }
 
@@ -289,7 +289,7 @@ document
   .addEventListener("click", function () {
     if (!checkAllCardsSorted()) {
       alert(
-        "⚠️ Por favor, categoriza todas las cartas antes de copiar el link!"
+        "⚠️ Please categorize all cards before finishing!"
       );
       return;
     }
@@ -315,7 +315,7 @@ document
   .addEventListener("click", function () {
     if (!checkAllCardsSorted()) {
       alert(
-        "⚠️ Por favor, categoriza todas las cartas antes de terminar!"
+        "⚠️ Please categorize all cards before finishing!"
       );
       return;
     }
@@ -324,7 +324,7 @@ document
     let shareLink = `${window.location.protocol + "//" + window.location.hostname
       }/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
 
-    let whatsappMessage = `Esta son las respuestas del card sorting: ${shareLink}`;
+    let whatsappMessage = `This is my response to the card sorting exercise: ${shareLink}`;
 
     let whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(
       whatsappMessage
