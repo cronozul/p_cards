@@ -1,0 +1,324 @@
+@keyframes bounce {
+
+    0%,
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    50% {
+      transform: translateX(10px);
+    }
+  }
+
+  .scroll-indicator {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    font-size: 24px;
+    color: black;
+    animation: bounce 1s infinite;
+    transition: opacity 0.5s ease-out;
+  }
+
+  body {
+    font-family: "League Spartan", sans-serif;
+    text-align: center;
+    padding: 20px;
+    background: #ffffff;
+    position: relative;
+  }
+
+  /* media query for body */
+  @media (max-width: 480px) {
+    body {
+      /* width: 60vw;
+        height: 60vh; */
+      margin: 0.3rem;
+      padding: 0;
+      /* overflow: hidden; Optional: Prevents scrolling */
+    }
+
+    /* make categorys min height much smaller */
+
+  }
+
+  /* make a media for size of input text */
+  @media (max-width: 480px) {
+    input {
+      font-size: 0.6rem !important;
+    }
+  }
+
+  input {
+    font-family: "League Spartan", sans-serif;
+    font-size: 1rem;
+    /* allow wrapping */
+    word-wrap: break-word;
+    text-align: center;
+    color: black;
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    /* text-transform: uppercase; */
+    font-weight: bold;
+    /* put default text */
+  }
+
+  .top-buttons {
+    margin-top: 5px;
+    display: flex;
+    /* position: absolute; */
+    /* top: 10px; */
+    /* right: 10px; */
+    /* display: flex; */
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .button {
+    background: #643366;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: "League Spartan";
+  }
+
+  .initial-zone,
+  .category {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    /* min-height: 60px; */
+    min-width: 10px;
+    /* background: #ffecec; */
+    padding: 10px 20px;
+    /* border-radius: 8px; */
+    /* border: 2px dashed #656565; */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    /* box-sizing: border-box; */
+    position: relative;
+
+    border-radius: 16px;
+    border: 1px solid var(--neutral-colors-neutral-02, #656565);
+    background: #fff;
+    box-shadow: 0px 4px 4px 0px #656565;
+    margin: 10px;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: auto;
+    justify-content: flex-start;
+    margin-top: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+  }
+  /* hacky way to modify tally survey */
+  .tally-form-mV4RY6 {
+  position: fixed;
+  /* right: 20px; */
+  left: 20px !important;
+  bottom: 20px;
+  z-index: 2147483000;
+  width: auto;
+  height: 70vh !important;
+  max-width: 95vw;
+  display: -ms-flexbox;
+  display: flex
+;
+  background-color: transparent;
+  border-radius: 5px;
+  box-shadow: #0f0f0f0d 0 0 0 1px, #0f0f0f1a 0 3px 6px, #0f0f0f33 0 9px 24px;
+  opacity: 0;
+}
+
+  button {
+    align-items: center;
+    /* align vertically */
+    display: flex;
+    vertical-align: middle;
+  }
+
+  /* when screen size is very small ensure min-width is 35vw when is larger just put a max  */
+  @media screen and (max-width: 480px) {
+    .category {
+      width: 30vw !important;
+
+
+    }
+  }
+
+  /* eliminate padding for container when screen is small */
+  @media screen and (max-width: 480px) {
+    .container {
+      padding: 0;
+      width: 100vw !important;
+    }
+  }
+
+  @media screen and (min-width: 480px) {
+    .category {
+      width: 220px !important;
+    }
+
+  }
+
+  /* change h4 h3 h2 h1 too smaller if screen is small */
+  @media screen and (max-width: 480px) {
+
+    h4 {
+      font-size: 0.6rem;
+    }
+
+    h3 {
+      font-size: 0.8rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      font-size: 0.7rem;
+    }
+    .button {
+      font-size: 0.6rem;
+    }
+  }
+
+  .category {
+    /* max-width: 240px !important; */
+    /* make min-height important */
+    /* TODO find why this is overwritten */
+    min-height: 15vh !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    /* gap: 1px; */
+    align-content: flex-start;
+    justify-content: center;
+  }
+
+  .category-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .category.freeform {
+    border: 2px dashed rgba(101, 101, 101, 0.091);
+    /* Dashed border with less opacity */
+    background: rgba(255,
+        255,
+        255,
+        0.5);
+    /* Slightly transparent background */
+    box-shadow: 0px 4px 4px 0px rgba(101, 101, 101, 0.144);
+    /* Softer shadow */
+    color: rgba(101, 101, 101, 0.3);
+    /* make it an input form */
+  }
+
+  /* correct wrapping */
+
+  .initial-zone {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow wrapping */
+    align-items: center;
+    /* Align elements properly */
+    gap: 8px;
+    /* Space between elements */
+  }
+
+  .title {
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px;
+    white-space: nowrap;
+    /* Prevent title from wrapping unnecessarily */
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Ensure cards wrap */
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .card {
+    /* background: #ffffff;  */
+    color: black;
+    padding: 10px 15px;
+    /* border-radius: 5px;  */
+    /* margin: 5px; */
+    cursor: grab;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    font-size: 14px;
+    transition: transform 0.2s;
+    border-radius: 16px;
+    border: 1px solid var(--neutral-colors-neutral-02, #656565);
+    background: #fff;
+    box-shadow: 0px 4px 4px 0px #656565;
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      width: fit-content;
+      height: fit-content;
+      /* width: auto; Let the card size adapt */
+      min-width: 50px;
+      /* Prevent it from becoming too small */
+      max-width: 75%;
+      /* Avoid taking too much space */
+      font-size: 10px;
+      /* Reduce font size */
+      padding: 8px 10px;
+      /* Adjust padding */
+      word-wrap: break-word;
+      /* Force text to wrap */
+      text-align: center;
+      /* Keep text centered */
+    }
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .dragging {
+    opacity: 0.5;
+  }
+
+  /* .page {
+      max-width: 100vw;
+      max-height: 100vh;
+    } */
