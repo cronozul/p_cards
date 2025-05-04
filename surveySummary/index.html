@@ -59,7 +59,8 @@
     <p>Order: <select id="order">
         <option value="name">by Name</option>
         <option value="count">by Frequency</option>
-        <option value="group">by Cluster</option>
+        <!-- TODO reimplement this option -->
+        <!-- <option value="group">by Cluster</option> -->
       </select>
 
       </p>
@@ -75,7 +76,19 @@
 
     <script>
         // 🔴 CENTRALIZED SURVEY DATA (Used for D3.js & Pyodide)
-        const cards = ['Buscar veterinaria', 'Mapa', 'QR', 'Citas', 'Ayuda',
+
+        // try to load selectedVectors and cards from localStorage
+        // const survey = JSON.parse(localStorage.getItem('selectedVectors')) || null;
+        // const cards = JSON.parse(localStorage.getItem('cards')) || null;
+        let survey = null;
+        let cards = null;
+        if (survey && cards) {
+            console.log("Loaded from localStorage: ", survey, cards);
+        } else {
+            console.log("No data found in localStorage.");
+            // alert user
+            alert("No data found in localStorage. using default data to show charting, please go to responsesDashboard to select data.");
+             cards = ['Buscar veterinaria', 'Mapa', 'QR', 'Citas', 'Ayuda',
             'Información de veterinaria', 'Clubs', 'Rating / Reviews',
             'Configuración notificaciones', 'Términos y condiciones',
             'Cerrar sesión', 'Configuración', 'Salud', 'Perfil mascota',
@@ -88,7 +101,7 @@
             'Configuración recordatorio para citas y vacunas', 'Recordatorio cita',
             'Recordatorio vacuna', 'Clubes', 'Editar Biografia'];
 
-        const survey = [[0, 0, 0.0, 0, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.0, 0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2, 2.0, 2.0, 2.0, 2.0, 2.0, 3, 3.0, 3, 3.0, 3, 3.0, 3.0, 'NaN', 'NaN'],
+         survey = [[0, 0, 0.0, 0, 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.0, 0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2, 2.0, 2.0, 2.0, 2.0, 2.0, 3, 3.0, 3, 3.0, 3, 3.0, 3.0, 'NaN', 'NaN'],
         [1, 0, 2.0, 0, 0.0, 0.0, 0.0, 0, 'NaN', 'NaN', 'NaN', 1, 1.0, 1.0, 3.0, 2.0, 2.0, 1.0, 1.0, 1, 2.0, 0.0, 2.0, 2.0, 1.0, 3, 3.0, 0, 3.0, 1, 1.0, 1.0, 'NaN', 'NaN'],
         [0, 0, 0.0, 0, 2.0, 0.0, 0.0, 0, 'NaN', 'NaN', 'NaN', 2, 1.0, 1.0, 0.0, 2.0, 2.0, 3.0, 1.0, 2, 0.0, 0.0, 2.0, 2.0, 2.0, 3, 3.0, 3, 3.0, 2, 3.0, 3.0, 'NaN', 'NaN'],
         [0, 0, 1.0, 1, 2.0, 0.0, 1.0, 0, 'NaN', 'NaN', 'NaN', 2, 1.0, 1.0, 3.0, 1.0, 1.0, 3.0, 1.0, 1, 2.0, 0.0, 1.0, 2.0, 2.0, 3, 3.0, 3, 3.0, 2, 3.0, 3.0, 'NaN', 'NaN'],
@@ -104,30 +117,53 @@
         [0, 0, 2.0, 0, 0.0, 0.0, 1.0, 1, 1.0, 1.0, 0.0, 0, 2.0, 0.0, 1.0, 1.0, 'NaN', 0.0, 'NaN', 2, 0.0, 'NaN', 0.0, 'NaN', 1.0, 3, 'NaN', 0, 'NaN', 1, 3.0, 3.0, 'NaN', 'NaN'],
         [0, 0, 'NaN', 0, 0.0, 'NaN', 0.0, 1, 2.0, 0.0, 0.0, 1, 2.0, 0.0, 2.0, 'NaN', 1.0, 0.0, 2.0, 2, 0.0, 2.0, 0.0, 1.0, 1.0, 3, 3.0, 0, 3.0, 1, 'NaN', 3.0, 'NaN', 'NaN'],
         [0, 0, 0.0, 0, 0.0, 0.0, 'NaN', 0, 3.0, 0.0, 0.0, 0, 0.0, 2.0, 0.0, 1.0, 1.0, 0.0, 'NaN', 0, 1.0, 0.0, 1.0, 1.0, 1.0, 0, 3.0, 0, 0.0, 3, 3.0, 3.0, 0.0, 2.0],
-        ]; // ⬆️ Truncated for brevity
+        ]; 
+        }
+        
+
+        // log the shape of survey
+        console.log("Survey shape: ", survey.length, "x", survey[0].length);
+        //  log the shape of cards
+        console.log("Cards shape: ", cards.length, "x", 1);
 
         // 🔹 Convert Survey Data to Links Format for D3.js
         function convertSurveyToLinks(cards, survey) {
-            let links = [];
-            let count = {}; // Store co-occurrence counts
+    let links = [];
+    let count = {}; // Store co-occurrence counts
 
-            for (let response of survey) {
-                let activeItems = response.map((val, i) => (val !== 'NaN' ? cards[i] : null)).filter(v => v !== null);
-                for (let i = 0; i < activeItems.length; i++) {
-                    for (let j = i + 1; j < activeItems.length; j++) {
-                        let key = [activeItems[i], activeItems[j]].sort().join("_");
-                        count[key] = (count[key] || 0) + 1;
-                    }
+    for (let response of survey) {
+        // Group cards by category index (e.g., 0, 1, 2...)
+        let categoryMap = {};
+
+        response.forEach((category, i) => {
+            if (!categoryMap[category]) categoryMap[category] = [];
+            categoryMap[category].push(cards[i]);
+        });
+
+        // For each category, link all pairs of cards in that group
+        for (let group of Object.values(categoryMap)) {
+            for (let i = 0; i < group.length; i++) {
+                for (let j = i + 1; j < group.length; j++) {
+                    let key = [group[i], group[j]].sort().join("_");
+                    count[key] = (count[key] || 0) + 1;
                 }
             }
-
-            Object.entries(count).forEach(([pair, value]) => {
-                let [source, target] = pair.split("_");
-                links.push({ source: cards.indexOf(source), target: cards.indexOf(target), value });
-            });
-
-            return { nodes: cards, links };
         }
+    }
+
+    // Convert count object into D3-style links
+    Object.entries(count).forEach(([pair, value]) => {
+        let [source, target] = pair.split("_");
+        links.push({
+            source: cards.indexOf(source),
+            target: cards.indexOf(target),
+            value
+        });
+    });
+
+    return { nodes: cards, links };
+}
+
 
         const clusterData = convertSurveyToLinks(cards, survey);
         window.clusterData = clusterData; // 🔹 Make it accessible for d3_matrix.js
