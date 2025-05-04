@@ -1,0 +1,74 @@
+body {
+    font-family: 'DM Serif Text', serif;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 20px;
+}
+
+.uxvault-wrapper {
+   display: flex;
+   flex-direction: row;
+   align-items: left;
+   justify-content: left;
+   padding: 8px;
+   flex: 1; 
+   top: 0px;
+}
+#id-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 10px;
+  max-width: 1000px;
+  font-family: 'League Spartan';
+}
+
+.card {
+    background: #FFF;
+    padding: 20px;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px 0px #656565;
+    position: relative;
+    border: 1px solid var(--neutral-colors-neutral-02, #656565);
+}
+.share-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: none;
+    border: 1px solid var(--neutral-colors-neutral-02, #656565);
+    cursor: pointer;
+    border-radius: 16px;
+
+}
+
+.floating-btn {
+    background: #643366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.buttons_row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    /* padding between buttons */
+    gap: 10px;
+} 

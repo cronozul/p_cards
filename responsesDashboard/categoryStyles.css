@@ -30,6 +30,43 @@
       box-shadow: 0px 4px 4px 0px #656565;
       margin: 10px;
     }
+    .response {
+      position: relative;
+      display: block;
+    
+      width: 300px;            /* Fixed width */
+      height: 60px;            /* Fixed height */
+      overflow-y: auto;        /* Scroll vertically if needed */
+      overflow-x: hidden;      /* Hide horizontal overflow */
+      white-space: pre-wrap;   /* ✅ Key: show \n as line breaks */
+      word-break: break-word;  /* Prevent overflow from long words */
+    
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 16px;
+      border: 1px solid #656565;
+      background: #fff;
+      box-shadow: 0px 4px 4px 0px #656565;
+    }
+
+    
+
+    .response {
+      scrollbar-width: none;           /* Firefox */
+      -ms-overflow-style: none;        /* IE 10+ */
+    }
+    
+    .response::-webkit-scrollbar {
+      display: none;                   /* Chrome, Safari, Edge */
+    }
+    
+    
+    .response-checkbox {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    
 
     .cards-container {
       display: flex;

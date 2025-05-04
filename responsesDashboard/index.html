@@ -21,58 +21,44 @@
     <div class="uxvault-wrapper">
         <img src="img/ux-vault-logo.svg" alt="UX Vault Logo" class="ux-vault-logo">
     </div>
-    <h2>Card sorting responses</h2>
 
-    Make sure to share this link with the survey collector
-
+    <!-- <h1>Responses Dashboard</h1> -->
+     <!-- make a centered title use absolute positioning so it overrrider uxvault wrapper bar-->
+      <h1 style= "position: absolute; top: 50px; left: 50%; transform: translateX(-50%); font-size: 2.5rem; color: #000000; text-align: center;">
+        Responses Dashboard</h1>
+                  <p style="text-align: center; font-family: 'DM Serif Text', serif; font-size: 1.2rem; margin-top: 20px;">Here you can see all the surveys that you have completed or have been shared with you. Currently we only support getting results from a single section (survey that share all their cards) we are sorry. </p>
+<!-- If url contains data do an alert saying Make sure to share this link with the survey collector , if you are the survey collector, you have already stored the data in the database, so you can ignore this message. -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const data = urlParams.get('data');
+        if (data) {
+            alert("Make sure to share this link with the survey collector");
+        }
+    </script>
+    
+    
     <div id="id-container"></div>
-    <button class="floating-btn" onclick="verResultados()">Get results</button>
+    <div>
 
-    <!-create a flexbox that will contain all surveys that share - -->
-    <h2>Shared Surveys</h2>
-        <div class="container" id="categories-container">
-            <!-- Create a title for the section -->
-
-
-            <div class="category-group">
-                <div class="category"> test box
-                    <div class="cards-container" id="category-0"></div>
-                </div>
-                <div class="category"> test box
-                    <div class="cards-container" id="category-1"></div>
-                </div>
-            </div>
-            <div class="category-group">
-                <div class="category"> test box
-                    <div class="cards-container" id="category-2"></div>
-                </div>
-                <div class="category"> test box
-                    <div class="cards-container" id="category-3"></div>
-                </div>
-            </div>
-            </div>
+        <!-- instead of a div use something that will stay on the bottom of the page -->
+         <div class="buttons_row">
+            <button class="floating-btn" onclick="verResultados()">Get results</button>
+            <button class="floating-btn" onclick="clearAllSelections()">Clear all selections</button>
+            <!-- add button for deleteCache -->
+            <button class="floating-btn" onclick="deleteCache()">Delete all surveys</button>
         </div>
-        <h2>Shared Surveys 2</h2>
-        <div class="container" id="categories-container">
 
-            <div class="category-group">
-                <div class="category"> test box
-                    <div class="cards-container" id="category-0"></div>
-                </div>
-                <div class="category"> test box
-                    <div class="cards-container" id="category-1"></div>
-                </div>
-            </div>
-            <div class="category-group">
-                <div class="category"> test box
-                    <div class="cards-container" id="category-2"></div>
-                </div>
-                <div class="category"> test box
-                    <div class="cards-container" id="category-3"></div>
-                </div>
-            </div>
-            </div>
+    </div>
+    
+    <!--create a flexbox that will contain all surveys that share - -->
+    <div class="responses-dashboard">
+        <div class="responses-dashboard-header">
+
         </div>
+        <div class="responses-dashboard-content">
+
+        </div>
+   
 
 
 
