@@ -82,13 +82,15 @@
         // allow a data option in url to load default
         const urlParams = new URLSearchParams(window.location.search);
         const data = urlParams.get('data');
+        let survey = null;
+        let cards = null;
         if (data) {
-            const survey = null;
-            const cards = null;
+            survey = null;
+            cards = null;
         }
         else {
-            const survey = JSON.parse(localStorage.getItem('selectedVectors')) || null;
-            const cards = JSON.parse(localStorage.getItem('cards')) || null;
+            survey = JSON.parse(localStorage.getItem('selectedVectors')) || null;
+            cards = JSON.parse(localStorage.getItem('cards')) || null;
         }
         if (survey && cards) {
             console.log("Loaded from localStorage: ", survey, cards);
