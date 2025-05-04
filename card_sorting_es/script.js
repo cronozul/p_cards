@@ -296,7 +296,7 @@ document
 
     let compressedCode = generateCompressedCode();
     let shareLink = `${window.location.origin
-      }/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
+      }/responsesDashboard/index.html?data=${encodeURIComponent(compressedCode)}`;
 
     // navigator.clipboard
     //   .writeText(shareLink)
@@ -322,7 +322,7 @@ document
 
     let compressedCode = generateCompressedCode();
     let shareLink = `${window.location.protocol + "//" + window.location.hostname
-      }/responsesDashboard?data=${encodeURIComponent(compressedCode)}`;
+      }/responsesDashboard/index.html?data=${encodeURIComponent(compressedCode)}`;
 
     let whatsappMessage = `Esta son las respuestas del card sorting: ${shareLink}`;
 
