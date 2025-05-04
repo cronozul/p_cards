@@ -78,10 +78,18 @@
         // 🔴 CENTRALIZED SURVEY DATA (Used for D3.js & Pyodide)
 
         // try to load selectedVectors and cards from localStorage
-        // const survey = JSON.parse(localStorage.getItem('selectedVectors')) || null;
-        // const cards = JSON.parse(localStorage.getItem('cards')) || null;
-        let survey = null;
-        let cards = null;
+
+        // allow a data option in url to load default
+        const urlParams = new URLSearchParams(window.location.search);
+        const data = urlParams.get('data');
+        if (data) {
+            const survey = null;
+            const cards = null;
+        }
+        else {
+            const survey = JSON.parse(localStorage.getItem('selectedVectors')) || null;
+            const cards = JSON.parse(localStorage.getItem('cards')) || null;
+        }
         if (survey && cards) {
             console.log("Loaded from localStorage: ", survey, cards);
         } else {
