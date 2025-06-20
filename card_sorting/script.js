@@ -241,13 +241,13 @@ function generateCompressedCode() {
     // add index to allow duplicate names
     categoryIndex = categoryIndex + "_" + index;
     let cards = Array.from(category.querySelectorAll(".card"));
-    let cardIds = cards.map((card) => card.id.replace("card-", ""));
+    // let cardIds = cards.map((card) => card.id.replace("card-", ""));
+    cardNames = cards.map((card) => card.innerText.trim());
 
-    if (cardIds.length) {
-      cardAssignments[categoryIndex] = cardIds;
+    if (cardNames.length) {
+      cardAssignments[categoryIndex] = cardNames;
     }
   });
-
   // Encode data as a JSON string and then Base64
   let dataString = JSON.stringify({
     // categories: categoryNames,
