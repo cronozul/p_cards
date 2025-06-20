@@ -63,9 +63,10 @@
         <!-- <option value="group">by Cluster</option> -->
       </select>
 
-      </p>
-
-    <p id="loading">Loading similarity matrix...</p>
+      
+    </p>
+    <p id="loading">Loading similarity 
+        ...</p>
 
     <div class="container">
         <div id="matrix-container" class="plot-container"></div>
@@ -131,6 +132,7 @@
         }
         
 
+
         // log the shape of survey
         console.log("Survey shape: ", survey.length, "x", survey[0].length);
         //  log the shape of cards
@@ -191,7 +193,9 @@
             const pythonCode = await fetch("py_cluster.py").then(res => res.text());
             const jsonClusterData = JSON.stringify(clusterData);
 
-            let base64Image = await pyodideInstance.runPythonAsync(`
+ const jsonSurveyData = JSON.stringify(survey);
+
+        let base64Image = await pyodideInstance.runPythonAsync(`
 import json
 import numpy as np
 import pandas as pd
@@ -203,24 +207,47 @@ import base64
 # Load data from JS
 cluster_data = json.loads("""${jsonClusterData}""")
 variables = cluster_data["nodes"]
+total_respondents = ${survey.length} 
 
-# Build similarity matrix
+# --- FIX STARTS HERE ---
+
+# 1. Build a raw co-occurrence count matrix (as before)
 n = len(variables)
-matrix = np.zeros((n, n))
-
+count_matrix = np.zeros((n, n))
 for link in cluster_data["links"]:
-    matrix[link["source"], link["target"]] = link["value"]
-    matrix[link["target"], link["source"]] = link["value"]
+    count_matrix[link["source"], link["target"]] = link["value"]
+    count_matrix[link["target"], link["source"]] = link["value"]
 
-# Clustering
-Z = sch.linkage(matrix, method='ward')
+# 2. Normalize the counts to create a Similarity Matrix (0-100 scale)
+# Avoid division by zero if total_respondents is 0
+if total_respondents > 0:
+    similarity_matrix = (count_matrix / total_respondents) * 100
+else:
+    similarity_matrix = count_matrix # or np.zeros_like(count_matrix)
+
+# Set the diagonal to 100% agreement
+np.fill_diagonal(similarity_matrix, 100)
+
+# 3. Convert the Similarity Matrix into a Distance Matrix
+# This is the crucial step you were missing.
+distance_matrix = 100 - similarity_matrix
+
+
+
+# 4. Perform clustering on the CORRECT matrix (the distance matrix)
+# The linkage function now correctly interprets smaller values as "more similar"
+Z = sch.linkage(distance_matrix, method='ward')
 
 # Plot dendrogram
-fig, ax = plt.subplots(figsize=(10, 6))
-sch.dendrogram(Z, labels=variables, orientation="right", ax=ax)
+fig, ax = plt.subplots(figsize=(10, 8)) # Increased size for better label spacing
+sch.dendrogram(Z, labels=variables, orientation="right", ax=ax, leaf_font_size=9)
+plt.title("Dendrogram of Card Similarity")
+ax.set_xlabel("Distance (100 - % Agreement)")
+
 
 # Save as base64
 buf = io.BytesIO()
+# Use bbox_inches="tight" to prevent labels from being cut off
 fig.savefig(buf, format="png", bbox_inches="tight")
 buf.seek(0)
 base64.b64encode(buf.read()).decode("utf-8")
