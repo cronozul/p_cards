@@ -138,8 +138,7 @@
         //  log the shape of cards
         console.log("Cards shape: ", cards.length, "x", 1);
 
-        // 🔹 Convert Survey Data to Links Format for D3.js
-        function convertSurveyToLinks(cards, survey) {
+function convertSurveyToLinks(cards, survey) {
     let links = [];
     let count = {}; // Store co-occurrence counts
 
@@ -164,17 +163,39 @@
     }
 
     // Convert count object into D3-style links
+    let linksOut = [];
     Object.entries(count).forEach(([pair, value]) => {
         let [source, target] = pair.split("_");
-        links.push({
+        linksOut.push({
             source: cards.indexOf(source),
             target: cards.indexOf(target),
             value
         });
     });
 
-    return { nodes: cards, links };
+    // 🔸 Compute column-wise counts (including "NaN")
+    let allKeys = [...new Set(survey.flat())];
+    let numCols = survey[0].length;
+    let columnCounts = {};
+
+    for (let key of allKeys) {
+        columnCounts[key] = Array(numCols).fill(0);
+    }
+
+    for (let col = 0; col < numCols; col++) {
+        for (let row = 0; row < survey.length; row++) {
+            let value = survey[row][col];
+            columnCounts[value][col]++;
+        }
+    }
+
+    return {
+        nodes: cards,
+        links: linksOut,
+        columnCounts // 🔸 attach here
+    };
 }
+
 
 
         const clusterData = convertSurveyToLinks(cards, survey);
@@ -203,6 +224,30 @@ import scipy.cluster.hierarchy as sch
 import matplotlib.pyplot as plt
 import io
 import base64
+def find_pair_closest_to_threshold(A, threshold=0.5):
+    """
+    Finds the pair (i, j) with agreement >= threshold and closest to it from above.
+    """
+    n = A.shape[0]
+    candidates = [(i, j, A[i, j]) for i in range(n) for j in range(i+1, n) if A[i, j] >= threshold]
+    if not candidates:
+        return None, None, None
+    return min(candidates, key=lambda x: x[2])  # closest from above
+
+def find_merge_distance(Z, n, target_pair):
+    """
+    Given linkage matrix Z and original size n, find distance at which target_pair merges.
+    """
+    clusters = {i: {i} for i in range(n)}
+    for idx, (c1, c2, dist, _) in enumerate(Z):
+        c1, c2 = int(c1), int(c2)
+        merged = clusters[c1] | clusters[c2]
+        new_id = n + idx
+        clusters[new_id] = merged
+        if target_pair[0] in merged and target_pair[1] in merged:
+            return dist
+    return None  # shouldn't happen if pair exists
+
 
 # Load data from JS
 cluster_data = json.loads("""${jsonClusterData}""")
@@ -233,14 +278,20 @@ np.fill_diagonal(similarity_matrix, 100)
 distance_matrix = 100 - similarity_matrix
 
 
+threshold_to_graph = 0.5
+pair = find_pair_closest_to_threshold(similarity_matrix, threshold_to_graph)
 
 # 4. Perform clustering on the CORRECT matrix (the distance matrix)
 # The linkage function now correctly interprets smaller values as "more similar"
 Z = sch.linkage(distance_matrix, method='ward')
-
+# color_distance = find_merge_distance(Z, total_respondents, (pair[0], pair[1]))
 # Plot dendrogram
 fig, ax = plt.subplots(figsize=(10, 8)) # Increased size for better label spacing
-sch.dendrogram(Z, labels=variables, orientation="right", ax=ax, leaf_font_size=9)
+# sch.dendrogram(Z, labels=variables, orientation="right", ax=ax, leaf_font_size=9,
+#                color_threshold=color_distance, above_threshold_color='green')
+sch.dendrogram(Z, labels=variables, orientation="right", ax=ax, leaf_font_size=9,
+above_threshold_color='green')
+# plt.axvline(x=color_distance, color='red', linestyle='--', label=f'Cutoff at {threshold_to_graph:.2f}')
 plt.title("Dendrogram of Card Similarity")
 ax.set_xlabel("Distance (100 - % Agreement)")
 
