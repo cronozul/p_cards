@@ -394,7 +394,7 @@ function groupingsToClusterVector(assignments, categoryList) {
     
     const items = assignments[groupKey];
     for (const item of items) {
-      dictOfAssignments[item] = groupId;
+      dictOfAssignments[item] = groupKey;
     }
   }
 
