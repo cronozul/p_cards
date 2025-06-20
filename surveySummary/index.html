@@ -57,7 +57,7 @@
 <body>
     <h1>Interactive Similarity Matrix & Dendrogram</h1>
     <p>Order: <select id="order">
-        <option value="name">by Name</option>
+        <!-- <option value="name">by Name</option> -->
         <option value="count">by Frequency</option>
         <!-- TODO reimplement this option -->
         <!-- <option value="group">by Cluster</option> -->
@@ -171,6 +171,7 @@ function convertSurveyToLinks(cards, survey) {
             target: cards.indexOf(target),
             value
         });
+    
     });
 
     // 🔸 Compute column-wise counts (including "NaN")
